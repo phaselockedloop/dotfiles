@@ -99,4 +99,8 @@ export LC_TYPE=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 export PATH="$HOME/.cargo/bin:$PATH"
-eval `dircolors $HOME/src/dircolors-solarized/dircolors.ansi-light`
+eval `dircolors $HOME/configs/dircolors.ansi-light`
+
+
+export GPG_TTY=$(tty)
+
