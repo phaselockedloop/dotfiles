@@ -101,6 +101,8 @@ export LC_CTYPE=en_US.UTF-8
 export PATH="$HOME/.cargo/bin:$PATH"
 eval `dircolors $HOME/configs/dircolors.ansi-light`
 
-
 export GPG_TTY=$(tty)
 
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+autoload -Uz compinit
+compinit
