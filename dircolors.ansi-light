@@ -166,7 +166,7 @@ FILE 00
 # directory
 DIR 36
 # XX2, XX3, XX6, and XX7 directories
-OTHER_WRITABLE 34;47
+OTHER_WRITABLE 30;44
 # symbolic link
 LINK 35
 
@@ -432,9 +432,9 @@ EXEC 01;31  # Unix
 #.log 01;32
 #*~ 01;32
 #*# 01;32
-.log 01;34
+.log 01;32
 *~ 01;34
-*# 01;34
+*# 01;32
 
 # Unimportant non-text files
 # For universal scheme, use brightcyan 01;36
