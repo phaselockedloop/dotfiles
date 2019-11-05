@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'cespare/vim-toml'
 call plug#end()
 execute pathogen#infect()
 syntax on
