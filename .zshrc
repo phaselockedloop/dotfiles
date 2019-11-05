@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/andrewknowles/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -200'"
 setopt shwordsplit
 
@@ -89,7 +89,7 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin
 export TERM='xterm-256color'
 alias vi=nvim
 alias vim=nvim
