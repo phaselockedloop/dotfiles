@@ -1,11 +1,13 @@
 call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'cespare/vim-toml'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp'
 call plug#end()
-execute pathogen#infect()
 syntax on
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 set novisualbell
 set noerrorbells
 set nocompatible
@@ -24,8 +26,6 @@ set smartindent
 set shiftwidth=4
 set number
 set autochdir
-map <F2> <Esc>:1,$!xmllint --format -<CR>
-map <F3> <Esc>:e .<CR>
 set laststatus=2
 noremap <silent> <F10> :bd<CR>
 noremap <silent> <F12> :bn<CR>
@@ -38,7 +38,6 @@ hi CursorLine term=NONE cterm=NONE ctermbg=239
 set encoding=utf-8
 set cursorline
 map <C-t> :NERDTreeToggle<CR>
-map <C-s-n> :Files<CR>
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 function! s:buflist()

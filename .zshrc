@@ -97,7 +97,6 @@ alias vi=nvim
 alias vim=nvim
 alias tmux='tmux'
 alias l="exa -lha --git"
-alias gsync="~/gsync.sh"
 
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -114,12 +113,10 @@ zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -Uz compinit
 compinit
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export EDITOR="/usr/local/bin/nvim"
+export EDITOR="/usr/bin/nvim"
 export SHELL="/bin/zsh"
 source ~/bin/tmuxinator.zsh
 setopt no_complete_aliases
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^[^P' history-substring-search-up
