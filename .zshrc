@@ -95,7 +95,6 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin
 export TERM='xterm-256color'
 alias vi=nvim
 alias vim=nvim
-alias tmux='tmux'
 alias l="exa -lha --git"
 
 export LANGUAGE=en_US.UTF-8

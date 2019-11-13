@@ -4,7 +4,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp'
+Plug 'kien/ctrlp.vim'
 call plug#end()
 syntax on
 set runtimepath^=~/.vim/bundle/ctrlp.vim
