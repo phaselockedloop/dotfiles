@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -200'"
+export FZF_CTRL_T_OPTS="--ansi --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -200'"
+export FZF_DEFAULT_COMMAND='fd --color=always'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 setopt shwordsplit
 
 # Set name of the theme to load.
@@ -51,7 +53,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search)
+plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z)
 
 # User configuration
 
@@ -120,8 +122,9 @@ setopt no_complete_aliases
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-bindkey '^[j' history-substring-search-up
-bindkey '^[k' history-substring-search-down
+bindkey '^[^P' history-substring-search-up
+bindkey '^[^N' history-substring-search-down
 bindkey '^ ' autosuggest-accept
 
-# eval "$(starship init zsh)"
+fortune | cowsay | lolcat
+
