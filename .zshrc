@@ -53,7 +53,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z)
+plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo)
 
 # User configuration
 
@@ -95,7 +95,7 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin
 export TERM='xterm-256color'
 alias vi=nvim
 alias vim=nvim
-alias l="exa -lha --git"
+alias l="lsd -A1tl"
 
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
