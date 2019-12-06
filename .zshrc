@@ -2,6 +2,7 @@ export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -200'"
 export FZF_DEFAULT_COMMAND='fd --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 setopt shwordsplit
 
 ZSH_THEME="knowles"
@@ -55,8 +56,6 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-[ -s "$HOME/.extras.sh" ] && source "$HOME/.extras.sh"
-[ -s "$HOME/.token.zsh" ] && source "$HOME/.token.zsh"
 
 alias vi=nvim
 alias vim=nvim

@@ -7,7 +7,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 call plug#end()
 syntax on
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 set novisualbell
 set noerrorbells
 set nocompatible
@@ -27,6 +26,7 @@ set shiftwidth=4
 set number
 set autochdir
 set laststatus=2
+set mouse=
 noremap <silent> <F10> :bd<CR>
 noremap <silent> <F12> :bn<CR>
 noremap <silent> <F11> :bp<CR>
