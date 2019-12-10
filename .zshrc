@@ -56,9 +56,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+[ -s "$HOME/.rubies/ruby-2.6.5/bin/" ] && export PATH=$PATH:"$HOME/.rubies/ruby-2.6.5/bin/"
 
 alias vi=nvim
 alias vim=nvim
 alias l="lsd -A1tl"
 
 fortune | cowsay | lolcat
+
