@@ -1,3 +1,5 @@
+[ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
+# Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -200'"
 export FZF_DEFAULT_COMMAND='fd --color=always'
@@ -64,3 +66,4 @@ alias l="lsd -A1tl"
 
 fortune | cowsay | lolcat
 
+[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
