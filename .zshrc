@@ -47,17 +47,20 @@ bindkey '^ ' autosuggest-accept
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/games/
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
-[ -s "$HOME/configs/tmuxinator.zsh" ] && source $HOME/configs/tmuxinator.zsh
-[ -s "$HOME/.fzf.zsh" ] && source $HOME/.fzf.zsh
-[ -s "$HOME/.iterm2_shell_integration.zsh" ] && source "$HOME/.iterm2_shell_integration.zsh"
-[ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-[ -s "$HOME/.rubies/ruby-2.6.5/bin/" ] && export PATH=$PATH:"$HOME/.rubies/ruby-2.6.5/bin/"
+[ -s "$HOME/configs/tmuxinator.zsh" ]                                                        && source "$HOME/configs/tmuxinator.zsh"
+[ -s "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
+[ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
+[ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ]                                                     && source "$HOME/.scm_breeze/scm_breeze.sh"
+[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+[ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
+[ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
+[ -s "/usr/local/go/bin" ]                                                                   && export PATH="$HOME/usr/local/go/bin":$PATH
+[ -s "$HOME/.gem/ruby/2.6.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.6.0/bin":$PATH
+[ -s "/usr/local/opt/ruby/bin/" ]                                                            && export PATH="/usr/local/opt/ruby/bin":$PATH
 
 alias vi=nvim
 alias vim=nvim
