@@ -16,7 +16,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo)
+plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws)
 
 source $ZSH/oh-my-zsh.sh
 export TERM='xterm-256color'
@@ -50,7 +50,6 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PATH=$PATH:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/games/
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 [ -s "$HOME/configs/tmuxinator.zsh" ] && source $HOME/configs/tmuxinator.zsh
 [ -s "$HOME/.fzf.zsh" ] && source $HOME/.fzf.zsh
