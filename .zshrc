@@ -1,24 +1,20 @@
 [ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
-# Path to your oh-my-zsh installation.
+
 export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -200'"
 export FZF_DEFAULT_COMMAND='fd --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-setopt shwordsplit
-
-ZSH_THEME="knowles"
-
-HYPHEN_INSENSITIVE="true"
+export ZSH_THEME="knowles"
+export HYPHEN_INSENSITIVE="true"
 export UPDATE_ZSH_DAYS=1
-DISABLE_AUTO_TITLE="true"
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+export DISABLE_AUTO_TITLE="true"
+export ENABLE_CORRECTION="true"
+export COMPLETION_WAITING_DOTS="true"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent)
-
-source $ZSH/oh-my-zsh.sh
+export SHELL="/bin/zsh"
 export TERM='xterm-256color'
 
 export LANGUAGE=en_US.UTF-8
@@ -29,18 +25,17 @@ export LC_CTYPE=en_US.UTF-8
 export GPG_TTY=$(tty)
 export SDKMAN_DIR="$HOME/.sdkman"
 
+plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent)
+
+source $ZSH/oh-my-zsh.sh
+
+setopt shwordsplit
 setopt HIST_IGNORE_ALL_DUPS
+setopt no_complete_aliases
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -Uz compinit
 compinit
 
-[ -s "/usr/local/bin/nvim" ] && export EDITOR="/usr/local/bin/nvim"
-[ -s "/usr/bin/nvim" ] && export EDITOR="/usr/bin/nvim"
-
-export SHELL="/bin/zsh"
-setopt no_complete_aliases
-
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
 bindkey '^ ' autosuggest-accept
@@ -49,6 +44,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
+[ -s "/usr/local/bin/nvim" ]                                                                 && export EDITOR="/usr/local/bin/nvim"
+[ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
 [ -s "$HOME/configs/tmuxinator.zsh" ]                                                        && source "$HOME/configs/tmuxinator.zsh"
 [ -s "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
 [ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
