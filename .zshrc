@@ -33,8 +33,11 @@ setopt shwordsplit
 setopt HIST_IGNORE_ALL_DUPS
 setopt no_complete_aliases
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-autoload -Uz compinit
-compinit
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $HOME/.zsh/cache
+autoload -Uz compinit && compinit
+autoload bashcompinit && bashcompinit
+
 
 bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
@@ -52,17 +55,20 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ]                                                     && source "$HOME/.scm_breeze/scm_breeze.sh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
+[ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
+[ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
 [ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
-[ -s "/usr/local/go/bin" ]                                                                   && export PATH="$HOME/usr/local/go/bin":$PATH
-[ -s "$HOME/.gem/ruby/2.6.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.6.0/bin":$PATH
-[ -s "/usr/local/opt/ruby/bin/" ]                                                            && export PATH="/usr/local/opt/ruby/bin":$PATH
+[ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
+[ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
+[ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
+[ -s "$HOME/.gem/ruby/2.7.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.7.0/bin":$PATH
 
 alias vi=nvim
 alias vim=nvim
 alias l="lsd -A1tl"
 
+[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
+
 fortune | cowsay | lolcat
 
-[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
