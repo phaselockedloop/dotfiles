@@ -49,6 +49,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 [ -s "/usr/local/bin/nvim" ]                                                                 && export EDITOR="/usr/local/bin/nvim"
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
+
 [ -s "$HOME/configs/tmuxinator.zsh" ]                                                        && source "$HOME/configs/tmuxinator.zsh"
 [ -s "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
 [ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
@@ -57,6 +58,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
 [ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
+[ -s "$HOME/.token.zsh" ]                                                                    && source "$HOME/.token.zsh"
+[ -s "$HOME/configs/paste_hell.zsh" ]                                                        && source "$HOME/configs/paste_hell.zsh"
+
 [ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
@@ -71,4 +75,3 @@ alias l="lsd -A1tl"
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
 fortune | cowsay | lolcat
-
