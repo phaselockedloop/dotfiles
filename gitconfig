@@ -1,6 +1,6 @@
 [user]
-	email = andrew.knowles@gmail.com
-	name = Andrew Knowles
+    email = andrew.knowles@gmail.com
+    name = Andrew Knowles
     signingkey = 27947732DD4034AF
 [core]
     editor = /usr/bin/nvim
