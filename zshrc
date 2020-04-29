@@ -25,7 +25,7 @@ export LC_CTYPE=en_US.UTF-8
 export GPG_TTY=$(tty)
 export SDKMAN_DIR="$HOME/.sdkman"
 
-plugins=(gitfast docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent)
+plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,6 +67,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
 [ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
 [ -s "$HOME/.gem/ruby/2.7.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.7.0/bin":$PATH
+[ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
+[ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
 alias vi=nvim
 alias vim=nvim
