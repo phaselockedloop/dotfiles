@@ -25,6 +25,8 @@ export LC_CTYPE=en_US.UTF-8
 export GPG_TTY=$(tty)
 export SDKMAN_DIR="$HOME/.sdkman"
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
