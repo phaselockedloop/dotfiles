@@ -5,6 +5,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 syntax on
 set novisualbell

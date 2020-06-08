@@ -69,12 +69,14 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
 [ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
 [ -s "$HOME/.gem/ruby/2.7.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.7.0/bin":$PATH
+[ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
 [ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
 alias vi=nvim
 alias vim=nvim
 alias l="lsd -A1tl"
+alias gfz="git fuzzy"
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
