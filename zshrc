@@ -27,7 +27,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent)
+plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent nvm helm kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -75,8 +75,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 alias vi=nvim
 alias vim=nvim
-alias l="lsd -A1tl"
+alias l="lsd -A1tlrh --blocks permission,size,date,name"
 alias gfz="git fuzzy"
+alias cat="bat"
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
