@@ -63,13 +63,14 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/.token.zsh" ]                                                                    && source "$HOME/.token.zsh"
 [ -s "$HOME/configs/paste_hell.zsh" ]                                                        && source "$HOME/configs/paste_hell.zsh"
 
-[ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
+[ -s "$HOME/.rubies/ruby-2.6.5/bin" ]                                                        && export PATH="$HOME/.rubies/ruby-2.6.5/bin":$PATH
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
-[ -s "$HOME/.rubies/ruby-2.6.5/bin/" ]                                                       && export PATH="$HOME/.rubies/ruby-2.6.5/bin/":$PATH
+[ -s "$HOME/.rubies/ruby-2.6.5/bin" ]                                                        && export PATH="$HOME/.rubies/ruby-2.6.5/bin":$PATH
 [ -s "$HOME/.gem/ruby/2.7.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.7.0/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
+[ -s "$HOME/tools" ]                                                                         && export PATH="$HOME/tools":$PATH
 [ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
@@ -78,6 +79,7 @@ alias vim=nvim
 alias l="lsd -A1tlrh --blocks permission,size,date,name"
 alias gfz="git fuzzy"
 alias cat="bat"
+alias aws-vault="aws-vault --keychain=login"
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
