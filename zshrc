@@ -1,5 +1,6 @@
 [ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
 
+zmodload zsh/zprof
 export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(bat {} --color always || highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -400'"
 export FZF_DEFAULT_COMMAND='fd --color=always'
@@ -27,7 +28,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git docker docker-compose tmuxinator tmux ansible-server fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z cargo aws extract gpg-agent nvm helm kubectl)
+plugins=(git docker docker-compose tmuxinator tmux fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent helm kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -37,9 +38,14 @@ setopt no_complete_aliases
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
-autoload -Uz compinit && compinit
-autoload bashcompinit && bashcompinit
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
 
+autoload bashcompinit && bashcompinit
 
 bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
@@ -53,7 +59,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
 
 [ -s "$HOME/configs/tmuxinator.zsh" ]                                                        && source "$HOME/configs/tmuxinator.zsh"
-[ -s "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
 [ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ]                                                     && source "$HOME/.scm_breeze/scm_breeze.sh"
@@ -84,5 +89,3 @@ alias aws-vault="aws-vault --keychain=login"
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
 fortune | cowsay | lolcat
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
