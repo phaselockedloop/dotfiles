@@ -79,6 +79,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/.gem/ruby/2.7.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.7.0/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
 [ -s "$HOME/tools" ]                                                                         && export PATH="$HOME/tools":$PATH
+[ -s "$HOME/bin" ]                                                                           && export PATH="$HOME/bin":$PATH
+[ -s "$HOME/configs" ]                                                                       && export PATH="$HOME/configs":$PATH
 [ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
