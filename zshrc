@@ -1,12 +1,16 @@
+# -*- sh -*-
 [ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
 
-zmodload zsh/zprof
+export ZSH_DISABLE_COMPFIX=true
+export DISABLE_UPDATE_PROMPT=true
+
+#zmodload zsh/zprof
 export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(bat {} --color always || highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -400'"
 export FZF_DEFAULT_COMMAND='fd --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export ZSH_THEME="knowles"
+export ZSH_THEME=""
 export HYPHEN_INSENSITIVE="true"
 export UPDATE_ZSH_DAYS=1
 export DISABLE_AUTO_TITLE="true"
@@ -28,7 +32,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git docker docker-compose tmuxinator tmux fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent helm kubectl)
+plugins=(git docker docker-compose tmuxinator tmux fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -38,14 +42,17 @@ setopt no_complete_aliases
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
-autoload -Uz compinit
+
+setopt EXTENDEDGLOB
 
 if [[ -v IS_MAC ]]; then
-  if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-      compinit
-  else
-      compinit -C
-  fi
+    if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+        compinit
+    else
+        compinit -C
+    fi
+else 
+    autoload -U compinit && compinit
 fi
 
 autoload bashcompinit && bashcompinit
@@ -91,6 +98,8 @@ alias gfz="git fuzzy"
 alias cat="bat"
 alias aws-vault="aws-vault --keychain=login"
 
-[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
+autoload -U promptinit; promptinit
+prompt pure
 
-fortune | cowsay | lolcat
+[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
+#zprof
