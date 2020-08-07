@@ -45,16 +45,6 @@ zstyle ':completion:*' cache-path $HOME/.zsh/cache
 
 setopt EXTENDEDGLOB
 
-if [[ -v IS_MAC ]]; then
-    if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-        compinit
-    else
-        compinit -C
-    fi
-else 
-    autoload -U compinit && compinit
-fi
-
 autoload bashcompinit && bashcompinit
 
 bindkey '^[^P' history-substring-search-up
