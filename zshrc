@@ -19,6 +19,8 @@ export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export SHOW_AWS_PROMPT=false
+export PURE_PROMPT_PATH_FORMATTING=%~
+export PURE_GIT_PULL=0
 
 export SHELL="/bin/zsh"
 export TERM='xterm-256color'
