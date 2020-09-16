@@ -18,6 +18,7 @@ export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export SHOW_AWS_PROMPT=false
 
 export SHELL="/bin/zsh"
 export TERM='xterm-256color'
@@ -31,6 +32,8 @@ export GPG_TTY=$(tty)
 export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export REDIS_CLUSTER_IP=0.0.0.0
 
 plugins=(git docker docker-compose tmuxinator tmux fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent)
 
@@ -80,6 +83,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/configs" ]                                                                       && export PATH="$HOME/configs":$PATH
 [ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
+[ -s "$HOME/bin/google-cloud-sdk/bin/" ]                                                     && export PATH="$HOME/bin/google-cloud-sdk/bin/:$PATH"
 
 alias vi=nvim
 alias vim=nvim
@@ -89,7 +93,7 @@ alias cat="bat"
 alias aws-vault="aws-vault --keychain=login"
 
 autoload -U promptinit; promptinit
-prompt pure
+prompt purer
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 #zprof
