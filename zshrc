@@ -7,7 +7,8 @@ export DISABLE_UPDATE_PROMPT=true
 #zmodload zsh/zprof
 export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(bat {} --color always || highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -400'"
-export FZF_DEFAULT_COMMAND='fd --color=always'
+export FZF_DEFAULT_COMMAND='fd --color=always --type f'
+export FZF_DEFAULT_OPTS='--height 90% --border'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export ZSH_THEME=""
@@ -37,7 +38,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export REDIS_CLUSTER_IP=0.0.0.0
 
-plugins=(git docker docker-compose tmuxinator tmux fzf scm_breeze zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent)
+plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -66,7 +67,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/configs/tmuxinator.zsh" ]                                                        && source "$HOME/configs/tmuxinator.zsh"
 [ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ]                                                     && source "$HOME/.scm_breeze/scm_breeze.sh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
 [ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
@@ -86,6 +86,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 [ -s "$HOME/bin/google-cloud-sdk/bin/" ]                                                     && export PATH="$HOME/bin/google-cloud-sdk/bin/:$PATH"
+[ -s "$HOME/bin/cqlsh-5.1.19/bin/" ]                                                         && export PATH="$HOME/bin/cqlsh-5.1.19/bin/:$PATH"
 
 alias vi=nvim
 alias vim=nvim
