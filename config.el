@@ -88,6 +88,10 @@
 
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+(after! org
+  (setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE" "SKIPPED")))
+  )
+
 (projectile-global-mode)
 
 (setq projectile-enable-caching t)
