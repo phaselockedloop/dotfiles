@@ -75,6 +75,8 @@
 
 (setq elpy-rpc-python-command "python")
 
+(setq neo-smart-open t)
+
 (map! "<C-S-n>" #'helm-mini
       "<C-S-p>" #'helm-projectile
       "<f5>" #'neotree-toggle
@@ -82,9 +84,9 @@
       "<f12>" #'next-buffer
       )
 
+
 (global-set-key (kbd "C-S-n") #'helm-mini)
 (global-set-key (kbd "C-S-p") #'helm-projectile)
-(global-set-key (kbd "C-S-t") #'neotree-toggle)
 
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 

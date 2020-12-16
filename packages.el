@@ -52,3 +52,4 @@
 (package! elpy)
 (package! org-bullets)
 (package! helm-ag)
+(package! graphql-mode)
