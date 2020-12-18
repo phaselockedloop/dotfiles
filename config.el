@@ -99,3 +99,6 @@
 (setq projectile-enable-caching t)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
+
+ (dolist (hook '(text-mode-hook org-mode-hook markdown-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode 1))))
