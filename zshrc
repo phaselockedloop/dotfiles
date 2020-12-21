@@ -38,7 +38,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export REDIS_CLUSTER_IP=0.0.0.0
 
-plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent)
+plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent rbenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,12 +73,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/.token.zsh" ]                                                                    && source "$HOME/.token.zsh"
 [ -s "$HOME/configs/paste_hell.zsh" ]                                                        && source "$HOME/configs/paste_hell.zsh"
 
-[ -s "$HOME/.rubies/ruby-2.6.5/bin" ]                                                        && export PATH="$HOME/.rubies/ruby-2.6.5/bin":$PATH
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
-[ -s "$HOME/.rubies/ruby-2.6.5/bin" ]                                                        && export PATH="$HOME/.rubies/ruby-2.6.5/bin":$PATH
-[ -s "$HOME/.gem/ruby/2.7.0/bin" ]                                                           && export PATH="$HOME/.gem/ruby/2.7.0/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
 [ -s "$HOME/tools" ]                                                                         && export PATH="$HOME/tools":$PATH
 [ -s "$HOME/bin" ]                                                                           && export PATH="$HOME/bin":$PATH
@@ -87,6 +84,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 [ -s "$HOME/bin/google-cloud-sdk/bin/" ]                                                     && export PATH="$HOME/bin/google-cloud-sdk/bin/:$PATH"
 [ -s "$HOME/bin/cqlsh-5.1.19/bin/" ]                                                         && export PATH="$HOME/bin/cqlsh-5.1.19/bin/:$PATH"
+[ -s "$HOME/.rbenv/bin/" ]                                                                   && export PATH="$HOME/.rbenv/bin/:$PATH"
 
 alias vi=nvim
 alias vim=nvim
