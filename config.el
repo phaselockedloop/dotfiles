@@ -102,3 +102,6 @@
 
  (dolist (hook '(text-mode-hook org-mode-hook markdown-mode-hook))
       (add-hook hook (lambda () (flyspell-mode 1))))
+
+
+(setq neo-window-width 75)
