@@ -61,3 +61,7 @@ nnoremap <silent> <F5> :call fzf#run({
 \   'options': '+m',
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
+
+set ttimeout
+set ttimeoutlen=100
+set timeoutlen=3000
