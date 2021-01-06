@@ -38,7 +38,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export REDIS_CLUSTER_IP=0.0.0.0
 
-plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent rbenv)
+plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent rbenv ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 

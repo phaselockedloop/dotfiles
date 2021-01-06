@@ -105,3 +105,7 @@
 
 
 (setq neo-window-width 75)
+
+(setq projectile-globally-ignored-directories
+            (quote
+                (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target" "gems")))
