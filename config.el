@@ -25,7 +25,6 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -68,7 +67,7 @@
 (global-set-key (kbd "C-x C-c") 'my-done)
 (global-set-key (kbd "C-M-c") 'save-buffers-kill-emacs)
 
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme 'doom-dark+)
 
 (setq python-shell-interpreter "python"
       python-shell-interpreter-args "-i")
@@ -82,6 +81,7 @@
       "<f5>" #'neotree-toggle
       "<f11>" #'previous-buffer
       "<f12>" #'next-buffer
+      "<C-M-s-,>" #'nil
       )
 
 
@@ -91,7 +91,7 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 (after! org
-  (setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE" "SKIPPED")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i)" "|" "DONE(d)" "SKIPPED(s)")))
   )
 
 (projectile-global-mode)
@@ -109,3 +109,18 @@
 (setq projectile-globally-ignored-directories
             (quote
                 (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target" "gems")))
+
+(use-package shadowenv
+  :ensure t
+  :hook (after-init . shadowenv-global-mode))
+
+(doom-themes-neotree-config)
+(setq doom-themes-neotree-file-icons "doom-colors")
+(doom-themes-org-config)
+
+(use-package web-mode
+  :custom
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2))
+
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)

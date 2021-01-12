@@ -92,6 +92,7 @@ alias l="lsd -A1tlrh --blocks permission,size,date,name"
 alias gfz="git fuzzy"
 alias cat="bat"
 alias aws-vault="aws-vault --keychain=login"
+alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
 autoload -U promptinit; promptinit
 prompt purer
