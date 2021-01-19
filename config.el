@@ -102,15 +102,11 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
- (dolist (hook '(text-mode-hook org-mode-hook markdown-mode-hook))
-      (add-hook hook (lambda () (flyspell-mode 1))))
-
-
 (setq neo-window-width 75)
 
 (setq projectile-globally-ignored-directories
-            (quote
-                (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target" "gems")))
+      (quote
+       (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target" "gems")))
 
 (use-package shadowenv
   :ensure t
@@ -128,3 +124,9 @@
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (setq dumb-jump-force-searcher 'rg)
+
+(setq ispell-dictionary "en")
+(setq aspell-dictionary "en")
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'rainbow-mode)

@@ -94,6 +94,10 @@ alias cat="bat"
 alias aws-vault="aws-vault --keychain=login"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
+rgl() {
+    rg -p $1 | less
+}
+
 autoload -U promptinit; promptinit
 prompt purer
 
