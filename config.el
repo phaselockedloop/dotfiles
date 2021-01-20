@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15 :weight 'light))
 
 ;; (set-face-attribute 'mode-line nil :font "JetBrains Mono 14")
 
@@ -130,3 +130,6 @@
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'rainbow-mode)
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+(super-save-mode +1)
+(setq super-save-auto-save-when-idle t)

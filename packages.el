@@ -64,3 +64,4 @@
 (package! rubocop :disable t)
 (package! shadowenv)
 (package! spell-fu :disable t)
+(package! super-save)
