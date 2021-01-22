@@ -69,7 +69,7 @@
 (global-set-key (kbd "C-x C-c") 'my-done)
 (global-set-key (kbd "C-M-c") 'save-buffers-kill-emacs)
 
-(setq doom-theme 'doom-dark+)
+(setq doom-theme 'doom-megadark+)
 
 (setq python-shell-interpreter "python"
       python-shell-interpreter-args "-i")
@@ -122,6 +122,7 @@
   (web-mode-code-indent-offset 2))
 
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'character)
 
 (setq dumb-jump-force-searcher 'rg)
 
