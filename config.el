@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'light)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15 :weight 'light))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15))
 
 ;; (set-face-attribute 'mode-line nil :font "JetBrains Mono 14")
 
@@ -55,7 +55,7 @@
 ;; they are implemented.
 ;;
 (add-to-list 'command-switch-alist '("(make-frame-visible)" .
-			             (lambda (s))))
+			                               (lambda (s))))
 
 (require 'server)
 (if (not (server-running-p)) (server-start))
@@ -76,7 +76,6 @@
 
 (setq elpy-rpc-python-command "python")
 
-(setq neo-smart-open t)
 
 (map! "<C-S-n>" #'helm-mini
       "<C-S-p>" #'helm-projectile
@@ -102,7 +101,6 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
-(setq neo-window-width 75)
 
 (setq projectile-globally-ignored-directories
       (quote
@@ -112,25 +110,48 @@
   :ensure t
   :hook (after-init . shadowenv-global-mode))
 
+(setq neo-smart-open t)
+(setq neo-window-width 75)
 (doom-themes-neotree-config)
 (setq doom-themes-neotree-file-icons "doom-colors")
 (doom-themes-org-config)
 
-(use-package web-mode
-  :custom
-  (web-mode-css-indent-offset 2)
-  (web-mode-code-indent-offset 2))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package web-mode              ;;
+;;   :custom                          ;;
+;;   (web-mode-css-indent-offset 2)   ;;
+;;   (web-mode-code-indent-offset 2)) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(setq highlight-indent-guides-method 'character)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;;
+;; (setq highlight-indent-guides-method 'character)         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq dumb-jump-force-searcher 'rg)
 
 (setq ispell-dictionary "en")
 (setq aspell-dictionary "en")
 
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook #'rainbow-mode)
+(add-hook! (prog-mode text-mode conf-mode special-mode) #'rainbow-delimiters-mode)
+(add-hook! (prog-mode text-mode conf-mode special-mode) #'rainbow-mode)
+(add-hook! (prog-mode text-mode conf-mode special-mode) #'hl-line-mode)
+
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (super-save-mode +1)
 (setq super-save-auto-save-when-idle t)
+;;(global-robe-mode)
+
+(add-hook 'xref-backend-functions #'projectile-find-tag)
+(map! :n "gd" (lambda() (interactive) (etags-select-find-tag-at-point)))
+(map! "M-," #'pop-tag-mark)
+
+(setq async-bytecomp-allowed-packages '(all))
+(setq pop-up-windows nil)
+(setq helm-projectile-fuzzy-match nil)
+(setq helm-candidate-number-limit 100)
+(setq projectile-indexing-method 'alien)
+(global-so-long-mode -1)
+(setq confirm-kill-emacs nil)
+(setq large-file-warning-threshold nil)
+(setq etags-select-go-if-unambiguous t)

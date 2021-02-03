@@ -19,7 +19,6 @@ export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-export SHOW_AWS_PROMPT=false
 export PURE_PROMPT_PATH_FORMATTING=%~
 export PURE_GIT_PULL=0
 
@@ -38,7 +37,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export REDIS_CLUSTER_IP=0.0.0.0
 
-plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z aws extract gpg-agent rbenv ruby rails)
+plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,11 +90,19 @@ alias vim=nvim
 alias l="lsd -A1tlrh --blocks permission,size,date,name"
 alias gfz="git fuzzy"
 alias cat="bat"
-alias aws-vault="aws-vault --keychain=login"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
 rgl() {
     rg -g "*.rb" -g"!*_test.*" -p "$1" | less
+}
+
+rglt() {
+    rg -g "*.rb" -p "$1" | less
+}
+
+multi_file_search_replace() {
+    echo "Running rg --files-with-matches ""$1"" | xargs gsed -i 's/""$1""/""$2""/g'"
+    rg --files-with-matches "$1" | xargs gsed -i 's/$1/$2/g'
 }
 
 autoload -U promptinit; promptinit
