@@ -84,6 +84,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/bin/google-cloud-sdk/bin/" ]                                                     && export PATH="$HOME/bin/google-cloud-sdk/bin/:$PATH"
 [ -s "$HOME/bin/cqlsh-5.1.19/bin/" ]                                                         && export PATH="$HOME/bin/cqlsh-5.1.19/bin/:$PATH"
 [ -s "$HOME/.rbenv/bin/" ]                                                                   && export PATH="$HOME/.rbenv/bin/:$PATH"
+[ -s "$HOME/.emacs.d/bin/" ]                                                                 && export PATH="$HOME/.emacs.d/bin/:$PATH"
 
 alias vi=nvim
 alias vim=nvim
@@ -98,11 +99,6 @@ rgl() {
 
 rglt() {
     rg -g "*.rb" -p "$1" | less
-}
-
-multi_file_search_replace() {
-    echo "Running rg --files-with-matches ""$1"" | xargs gsed -i 's/""$1""/""$2""/g'"
-    rg --files-with-matches "$1" | xargs gsed -i 's/$1/$2/g'
 }
 
 autoload -U promptinit; promptinit

@@ -140,7 +140,6 @@
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (super-save-mode +1)
 (setq super-save-auto-save-when-idle t)
-;;(global-robe-mode)
 
 (add-hook 'xref-backend-functions #'projectile-find-tag)
 (map! :n "gd" (lambda() (interactive) (etags-select-find-tag-at-point)))
@@ -155,3 +154,6 @@
 (setq confirm-kill-emacs nil)
 (setq large-file-warning-threshold nil)
 (setq etags-select-go-if-unambiguous t)
+(global-flycheck-mode)
+(add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
