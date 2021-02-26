@@ -23,10 +23,6 @@ ln -sf ~/dotfiles/vimrc ~/.config/nvim/init.vim
 ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/koehler2.vim ~/.config/nvim/colors/koehler2.vim
 
-# Rust
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-$HOME/.cargo/bin/cargo install broot bat cargo-update dijo exa fd-find git-delta just lsd ripgrep sccache topgrade xsv
-
 # scm puff
 mkdir -p ~/bin
 cd ~/bin
@@ -41,3 +37,8 @@ git clone https://github.com/DFurnes/purer ~/purer
 ln -s ~/purer/purer.plugin.zsh ~/purer/pure.zsh
 ln -s ~/purer/prompt_purer_setup ~/purer/pure.zsh
 ln -s ~/purer/async.zsh ~/purer/async
+
+# Rust
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+$HOME/.cargo/bin/cargo install broot bat cargo-update dijo exa fd-find git-delta just lsd ripgrep topgrade xsv
+$HOME/.cargo/bin/cargo install sccache
