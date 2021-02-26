@@ -5,10 +5,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # misc installs
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt-get -y install neovim wget npm
+sudo apt-get -y install neovim wget npm fzf
 sudo apt-get -y autoremove
 
 # Dotfiles
