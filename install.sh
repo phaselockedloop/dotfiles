@@ -6,7 +6,7 @@ git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTO
 
 # misc installs
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt-get -y install neovim wget npm fzf
+sudo apt-get -y install neovim wget npm fzf htop
 sudo apt-get -y autoremove
 
 # Dotfiles
@@ -34,11 +34,15 @@ sudo npm install -g tldr
 
 # purer
 git clone https://github.com/DFurnes/purer ~/purer
-ln -s ~/purer/purer.plugin.zsh ~/purer/pure.zsh
-ln -s ~/purer/prompt_purer_setup ~/purer/pure.zsh
+ln -s ~/purer/pure.zsh ~/purer/purer.plugin.zsh 
+ln -s ~/purer/pure.zsh ~/purer/prompt_purer_setup
 ln -s ~/purer/async.zsh ~/purer/async
 
 # Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-$HOME/.cargo/bin/cargo install broot bat cargo-update dijo exa fd-find git-delta just lsd ripgrep topgrade xsv
 $HOME/.cargo/bin/cargo install sccache
+echo "[build]" >> $HOME/.cargo/config
+SCCACHE_PATH=$HOME/.cargo/bin/sccache
+echo "rustc-wrapper = \"$SCCACHE_PATH\"" >> $HOME/.cargo/config
+$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep
+$HOME/.cargo/bin/cargo install broot topgrade xsv git-delta just exa cargo-update dijo
