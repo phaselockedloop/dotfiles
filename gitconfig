@@ -1,8 +1,26 @@
 [user]
-    email = andrew.knowles@gmail.com
-    name = Andrew Knowles
-    signingkey = 27947732DD4034AF
+	email = andrew.knowles@shopify.com
+	name = Andrew Knowles
+	signingkey = 5377DB85C96EC7D0
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [core]
+	commitGraph = true
+	pager = delta
+	excludesfile = ~/.gitignore_global
     editor = /usr/bin/nvim
-[commit]
-    gpgsign = true
+[diff]
+	algorithm = patience
+[gc]
+	writeCommitGraph = true
+[protocol]
+	version = 2
+[init]
+	defaultBranch = master
+[pull]
+	ff = only
+[fetch]
+	prune = true
