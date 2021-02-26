@@ -1,6 +1,8 @@
 # -*- sh -*-
 [ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
 
+export CONFIG_DIR=$HOME/dotfiles
+
 export ZSH_DISABLE_COMPFIX=true
 export DISABLE_UPDATE_PROMPT=true
 
@@ -35,8 +37,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export REDIS_CLUSTER_IP=0.0.0.0
-
 plugins=(git docker docker-compose tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
 source $ZSH/oh-my-zsh.sh
@@ -62,29 +62,28 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 [ -s "/usr/local/bin/nvim" ]                                                                 && export EDITOR="/usr/local/bin/nvim"
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
+[ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
-[ -s "$HOME/configs/tmuxinator.zsh" ]                                                        && source "$HOME/configs/tmuxinator.zsh"
+[ -s "$HOME/$CONFIG_DIR/tmuxinator.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/tmuxinator.zsh"
+[ -s "$HOME/$CONFIG_DIR/paste_hell.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/paste_hell.zsh"
 [ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
 [ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
-[ -s "$HOME/.token.zsh" ]                                                                    && source "$HOME/.token.zsh"
-[ -s "$HOME/configs/paste_hell.zsh" ]                                                        && source "$HOME/configs/paste_hell.zsh"
+[ -s "$HOME/.zsh/plugins/bd/bd.zsh" ]                                                        && source "$HOME/.zsh/plugins/bd/bd.zsh"
 
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
-[ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
-[ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
 [ -s "$HOME/tools" ]                                                                         && export PATH="$HOME/tools":$PATH
 [ -s "$HOME/bin" ]                                                                           && export PATH="$HOME/bin":$PATH
-[ -s "$HOME/configs" ]                                                                       && export PATH="$HOME/configs":$PATH
-[ -s "/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home" ]                 && export GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0.1/Contents/Home"
-[ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
-[ -s "$HOME/bin/google-cloud-sdk/bin/" ]                                                     && export PATH="$HOME/bin/google-cloud-sdk/bin/:$PATH"
-[ -s "$HOME/bin/cqlsh-5.1.19/bin/" ]                                                         && export PATH="$HOME/bin/cqlsh-5.1.19/bin/:$PATH"
+[ -s "$HOME/$CONFIG_DIR" ]                                                                   && export PATH="$HOME/$CONFIG_DIR":$PATH
 [ -s "$HOME/.rbenv/bin/" ]                                                                   && export PATH="$HOME/.rbenv/bin/:$PATH"
 [ -s "$HOME/.emacs.d/bin/" ]                                                                 && export PATH="$HOME/.emacs.d/bin/:$PATH"
+
+[ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
+[ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
+[ -s "/usr/local/bin/bit" ]                                                                  && complete -o nospace -C /usr/local/bin/bit bit
 
 alias vi=nvim
 alias vim=nvim
@@ -106,3 +105,5 @@ prompt purer
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 #zprof
+
+autoload -U +X bashcompinit && bashcompinit

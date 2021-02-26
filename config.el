@@ -57,6 +57,8 @@
 (add-to-list 'command-switch-alist '("(make-frame-visible)" .
 			                               (lambda (s))))
 
+(load "~/extras.elc" 'noerror)
+
 (require 'server)
 (if (not (server-running-p)) (server-start))
 

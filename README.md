@@ -1,2 +1,2 @@
-# configs
-home directory configs
+# DOTFILES
+Home directory dotfiles for hax
