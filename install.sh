@@ -6,9 +6,10 @@ git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTO
 
 # misc installs
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt-get -y install neovim wget
-sudo apt-get autoremove
+sudo apt-get -y install neovim wget npm
+sudo apt-get -y autoremove
 
 # Dotfiles
 ln -sf ~/dotfiles/vimrc ~/.vimrc
@@ -29,7 +30,16 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 $HOME/.cargo/bin/cargo install broot bat cargo-update dijo exa fd-find git-delta just lsd ripgrep sccache topgrade xsv
 
 # scm puff
+mkdir -p ~/bin
 cd ~/bin
 wget https://github.com/mroth/scmpuff/releases/download/v0.3.0/scmpuff_0.3.0_linux_x64.tar.gz
 tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
-mv scmpuff_0.3.0_linux_x64/scmpuff .
+
+# tldr
+sudo npm install -g tldr
+
+# purer
+git clone https://github.com/DFurnes/purer ~/purer
+ln -s ~/purer/purer.plugin.zsh ~/purer/pure.zsh
+ln -s ~/purer/prompt_purer_setup ~/purer/pure.zsh
+ln -s ~/purer/async.zsh ~/purer/async

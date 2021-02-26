@@ -91,6 +91,9 @@ alias l="lsd -A1tlrh --blocks permission,size,date,name"
 alias gfz="git fuzzy"
 alias cat="bat"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias grsh="git reset --hard"
+alias c="cd ~/src"
+eval "$(scmpuff init -s)"
 
 rgl() {
     rg -g "*.rb" -g"!*_test.*" -p "$1" | less
@@ -99,6 +102,8 @@ rgl() {
 rglt() {
     rg -g "*.rb" -p "$1" | less
 }
+
+fpath+=~/purer
 
 autoload -U promptinit; promptinit
 prompt purer
