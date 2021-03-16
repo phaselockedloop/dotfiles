@@ -5,6 +5,7 @@ export CONFIG_DIR=$HOME/dotfiles
 
 export ZSH_DISABLE_COMPFIX=true
 export DISABLE_UPDATE_PROMPT=true
+export GIT_COMPLETION_CHECKOUT_NO_GUESS=true
 
 #zmodload zsh/zprof
 export ZSH=$HOME/.oh-my-zsh
@@ -96,7 +97,7 @@ alias c="cd ~/src"
 eval "$(scmpuff init -s)"
 
 rgl() {
-    rg -g "*.rb" -g"!*_test.*" -p "$1" | less
+    rg -B5 -A5 -g "*.rb" -g"!*_test.*" -p "$1" | less
 }
 
 rglt() {
