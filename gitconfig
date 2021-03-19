@@ -11,7 +11,7 @@
 	commitGraph = true
 	pager = delta
 	excludesfile = ~/.gitignore_global
-    editor = /usr/bin/nvim
+    editor = nvim
 [diff]
 	algorithm = patience
 [gc]

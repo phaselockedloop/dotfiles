@@ -94,14 +94,17 @@ alias cat="bat"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias grsh="git reset --hard"
 alias c="cd ~/src"
-eval "$(scmpuff init -s)"
+
+if [ -x "$(command -v foo)" ]; then
+  eval "$(scmpuff init -s)"
+fi
 
 rgl() {
-    rg -B5 -A5 -g "*.rb" -g"!*_test.*" -p "$1" | less
+  rg -B5 -A5 -g "*.rb" -g"!*_test.*" -p "$1" | less
 }
 
 rglt() {
-    rg -g "*.rb" -p "$1" | less
+  rg -g "*.rb" -p "$1" | less
 }
 
 fpath+=~/purer

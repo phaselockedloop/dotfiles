@@ -22,8 +22,6 @@
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15))
 
-;; (set-face-attribute 'mode-line nil :font "JetBrains Mono 14")
-
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -100,16 +98,16 @@
 (projectile-global-mode)
 
 (setq projectile-enable-caching t)
+(setq shell-file-name "/bin/sh")
+(setq projectile-indexing-method 'alien)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
-
 
 (setq projectile-globally-ignored-directories
       (quote
        (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target" "gems")))
 
 (use-package shadowenv
-  :ensure t
   :hook (after-init . shadowenv-global-mode))
 
 (setq neo-smart-open t)
@@ -117,13 +115,6 @@
 (doom-themes-neotree-config)
 (setq doom-themes-neotree-file-icons "doom-colors")
 (doom-themes-org-config)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (use-package web-mode              ;;
-;;   :custom                          ;;
-;;   (web-mode-css-indent-offset 2)   ;;
-;;   (web-mode-code-indent-offset 2)) ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;;
@@ -153,9 +144,21 @@
 (setq helm-candidate-number-limit 100)
 (setq projectile-indexing-method 'alien)
 (global-so-long-mode -1)
+(setq doom-inhibit-large-file-detection t)
 (setq confirm-kill-emacs nil)
 (setq large-file-warning-threshold nil)
 (setq etags-select-go-if-unambiguous t)
 (global-flycheck-mode)
 (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+
+(setq doom-modeline-vc-max-length 100)
+(after! doom-modeline
+  (remove-hook 'doom-modeline-mode-hook #'size-indication-mode) ; filesize in modeline
+  (remove-hook 'doom-modeline-mode-hook #'column-number-mode)   ; cursor column in modeline
+  (setq doom-modeline-vcs-max-length 150)
+  (line-number-mode -1)
+  (set-face-attribute 'mode-line nil :font "JetBrains Mono 14")
+  (setq doom-modeline-buffer-encoding nil))
+
+(fringe-mode '8)
