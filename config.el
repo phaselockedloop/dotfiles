@@ -117,8 +117,8 @@
 (doom-themes-org-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;;
-;; (setq highlight-indent-guides-method 'character)         ;;
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;;
+(setq highlight-indent-guides-method 'character)         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq dumb-jump-force-searcher 'rg)

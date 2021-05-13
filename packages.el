@@ -63,7 +63,7 @@
 (package! graphql-mode)
 (package! helm-ag)
 (package! helm-xref)
-(package! highlight-indent-guides :disable t)
+(package! highlight-indent-guides)
 (package! org-bullets)
 (package! robe-mode :disable t)
 (package! rubocop)

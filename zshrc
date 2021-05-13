@@ -99,6 +99,14 @@ if [ -x "$(command -v foo)" ]; then
   eval "$(scmpuff init -s)"
 fi
 
+delete-branches() {
+  git branch |
+    grep --invert-match '\*' |
+    cut -c 3- |
+    fzf --multi --preview="git log {}" |
+    gxargs --no-run-if-empty git branch --delete --force
+}
+
 rgl() {
   rg -B5 -A5 -g "*.rb" -g"!*_test.*" -p "$1" | less
 }
