@@ -162,3 +162,6 @@
   (setq doom-modeline-buffer-encoding nil))
 
 (fringe-mode '8)
+
+(setq package-native-compile t)
+(setq warning-minimum-level :error)

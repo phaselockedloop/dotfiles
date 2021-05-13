@@ -94,6 +94,7 @@ alias cat="bat"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias grsh="git reset --hard"
 alias c="cd ~/src"
+alias gs="git status"
 
 if [ -x "$(command -v foo)" ]; then
   eval "$(scmpuff init -s)"
