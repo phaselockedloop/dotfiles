@@ -95,6 +95,9 @@ alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset 
 alias grsh="git reset --hard"
 alias c="cd ~/src"
 alias gs="git status"
+gbb() {
+    git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
+}
 
 if [ -x "$(command -v foo)" ]; then
   eval "$(scmpuff init -s)"
