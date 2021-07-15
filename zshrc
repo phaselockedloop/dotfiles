@@ -119,8 +119,6 @@ rglt() {
   rg -g "*.rb" -p "$1" | less
 }
 
-fpath+=~/purer
-
 autoload -U promptinit; promptinit
 prompt purer
 
@@ -128,3 +126,5 @@ prompt purer
 #zprof
 
 autoload -U +X bashcompinit && bashcompinit
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

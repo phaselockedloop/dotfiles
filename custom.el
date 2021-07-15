@@ -81,8 +81,6 @@
 (require 'custom)
 (require 'etags)
 
-;;; Custom stuff
-
 ;;;###autoload
 (defgroup etags-select-mode nil
   "*etags select mode."
@@ -132,7 +130,7 @@ Only works with GNU Emacs."
   :type 'boolean)
 
 ;;;###autoload
-(defcustom etags-select-go-if-unambiguous nil
+(defcustom etags-select-go-if-unambiguous t
   "*If non-nil, jump by tag number if it is unambiguous."
   :group 'etags-select-mode
   :type 'boolean)
@@ -217,12 +215,20 @@ Only works with GNU Emacs."
     (get-file-buffer tag-file)))
 
 ;;;###autoload
+
+(defun enh-ruby-mode-find-tag ()
+  (let (beg end)
+    (save-excursion
+      (setq beg (progn (search-backward-regexp "[^a-zA-Z\?_]") (forward-char) (point))
+            end (progn (search-forward-regexp "[^a-zA-Z\?_]") (backward-char) (point)))
+       (buffer-substring-no-properties beg end))))
+
 (defun etags-select-find-tag-at-point ()
   "Do a find-tag-at-point, and display all exact matches.  If only one match is
 found, see the `etags-select-no-select-for-one-match' variable to decide what
 to do."
   (interactive)
-  (etags-select-find (find-tag-default)))
+  (etags-select-find (enh-ruby-mode-find-tag)))
 
 ;;;###autoload
 (defun etags-select-find-tag ()
@@ -480,9 +486,11 @@ Use the C-u prefix to prevent the etags-select window from closing."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages '(helm-ag treemacs-all-the-icons all-the-icons)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ ;;
  )

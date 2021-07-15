@@ -20,7 +20,9 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15))
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 15)
+      )
 
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -52,6 +54,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;;
+
 (add-to-list 'command-switch-alist '("(make-frame-visible)" .
 			                               (lambda (s))))
 
@@ -116,11 +119,6 @@
 (setq doom-themes-neotree-file-icons "doom-colors")
 (doom-themes-org-config)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;;
-(setq highlight-indent-guides-method 'character)         ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (setq dumb-jump-force-searcher 'rg)
 
 (setq ispell-dictionary "en")
@@ -129,6 +127,10 @@
 (add-hook! (prog-mode text-mode conf-mode special-mode) #'rainbow-delimiters-mode)
 (add-hook! (prog-mode text-mode conf-mode special-mode) #'rainbow-mode)
 (add-hook! (prog-mode text-mode conf-mode special-mode) #'hl-line-mode)
+(add-hook! (prog-mode text-mode conf-mode special-mode) #'highlight-indent-guides-mode)
+
+(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-auto-character-face-perc 30)
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (super-save-mode +1)
@@ -136,6 +138,7 @@
 
 (add-hook 'xref-backend-functions #'projectile-find-tag)
 (map! :n "gd" (lambda() (interactive) (etags-select-find-tag-at-point)))
+(map! :n "gu" (lambda() (interactive) (etags-select-find-tag)))
 (map! "M-," #'pop-tag-mark)
 
 (setq async-bytecomp-allowed-packages '(all))
@@ -158,10 +161,11 @@
   (remove-hook 'doom-modeline-mode-hook #'column-number-mode)   ; cursor column in modeline
   (setq doom-modeline-vcs-max-length 150)
   (line-number-mode -1)
-  (set-face-attribute 'mode-line nil :font "JetBrains Mono 14")
-  (setq doom-modeline-buffer-encoding nil))
+  (setq doom-modeline-buffer-encoding nil)
+)
 
 (fringe-mode '8)
 
-(setq package-native-compile t)
 (setq warning-minimum-level :error)
+
+(global-evil-surround-mode 1)
