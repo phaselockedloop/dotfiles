@@ -158,7 +158,7 @@ prompt_pure_preprompt_render() {
 	# execution time
 	preprompt+="%B%F{242}${prompt_pure_cmd_exec_time}%f%b"
 
-	preprompt+=" "
+	preprompt+=" %F{cyan}❯%F{blue}❯%F{green}❯%f "
 
 	# make sure prompt_pure_last_preprompt is a global array
 	typeset -g -a prompt_pure_last_preprompt

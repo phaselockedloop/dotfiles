@@ -18,6 +18,7 @@ export ZSH_THEME=""
 export HYPHEN_INSENSITIVE="true"
 export UPDATE_ZSH_DAYS=1
 export DISABLE_AUTO_TITLE="true"
+export DISABLE_AUTO_UPDATE="true"
 export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -119,8 +120,6 @@ rglt() {
   rg -g "*.rb" -p "$1" | less
 }
 
-DISABLE_AUTO_UPDATE=true
-fpath+=$HOME/.zsh/pure
 fpath+=($fpath $HOME'/dotfiles/purer-prompt/functions')
 
 autoload -U promptinit; promptinit
