@@ -119,6 +119,10 @@ rglt() {
   rg -g "*.rb" -p "$1" | less
 }
 
+DISABLE_AUTO_UPDATE=true
+fpath+=$HOME/.zsh/pure
+fpath+=($fpath $HOME'/dotfiles/purer-prompt/functions')
+
 autoload -U promptinit; promptinit
 prompt purer
 
