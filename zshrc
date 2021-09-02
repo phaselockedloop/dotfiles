@@ -112,7 +112,7 @@ delete-branches() {
 }
 
 rgl() {
-  rg -B5 -A5 -g "*.rb" -g"!*_test.*" -p "$1" | less
+  rg -B5 -A5 -g "*.rb" -g"!*test*" -p "$1" | less
 }
 
 rglt() {
@@ -128,3 +128,5 @@ prompt purer
 autoload -U +X bashcompinit && bashcompinit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
