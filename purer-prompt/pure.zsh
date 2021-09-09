@@ -131,7 +131,6 @@ prompt_pure_preprompt_render() {
 	# construct preprompt
 	local preprompt=""
 
-
 	# add a newline between commands
   FIRST_COMMAND_THRESHOLD=1
   if [[ "$PURER_PROMPT_COMMAND_COUNT" -gt "$FIRST_COMMAND_THRESHOLD" ]]; then
@@ -142,21 +141,22 @@ prompt_pure_preprompt_render() {
 	local path_formatting="${PURE_PROMPT_PATH_FORMATTING:-%c}"
 
 	# show background jobs
-	preprompt+="%(1j.%F{242}%j %f.)"
+	# preprompt+="%(1j.%F{242}%j %f.)"
 	# show virtual env
-	preprompt+="%(12V.%F{242}%12v%f .)"
+	# preprompt+="%(12V.%F{242}%12v%f .)"
 	# begin with symbol, colored by previous command exit code
-	preprompt+="%F{$symbol_color}${PURE_PROMPT_SYMBOL:-❯}%f "
+	#preprompt+="%F{$symbol_color}${PURE_PROMPT_SYMBOL:-❯}%f "
 	# directory, colored by vim status
 	preprompt+="%B%F{$STATUS_COLOR}$path_formatting%f%b"
 	# git info
-	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
+	#preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
+	preprompt+="%F{$git_color}${vcs_info_msg_0_}%f"
 	# git pull/push arrows
-	preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
+	# preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
 	# username and machine if applicable
 	preprompt+=$prompt_pure_username
 	# execution time
-	preprompt+="%B%F{242}${prompt_pure_cmd_exec_time}%f%b"
+	#preprompt+="%B%F{242}${prompt_pure_cmd_exec_time}%f%b"
 
 	preprompt+=" %F{cyan}❯%F{blue}❯%F{green}❯%f "
 
@@ -194,9 +194,6 @@ prompt_pure_precmd() {
 	# get vcs info
 	vcs_info
 
-	# preform async git dirty check and fetch
-	prompt_pure_async_tasks
-
 	# Check if we should display the virtual env, we use a sufficiently high
 	# index of psvar (12) here to avoid collisions with user defined entries.
 	psvar[12]=
@@ -211,145 +208,13 @@ prompt_pure_precmd() {
 	prompt_pure_preprompt_render "precmd"
 
 	# Increment command counter
-  PURER_PROMPT_COMMAND_COUNT=$((PURER_PROMPT_COMMAND_COUNT+1))
+    PURER_PROMPT_COMMAND_COUNT=$((PURER_PROMPT_COMMAND_COUNT+1))
 
 	# print the preprompt
 	prompt_pure_preprompt_render "precmd"
 
 	# remove the prompt_pure_cmd_timestamp, indicating that precmd has completed
 	unset prompt_pure_cmd_timestamp
-}
-
-# fastest possible way to check if repo is dirty
-prompt_pure_async_git_dirty() {
-	setopt localoptions noshwordsplit
-	local untracked_dirty=$1 dir=$2
-
-	# use cd -q to avoid side effects of changing directory, e.g. chpwd hooks
-	builtin cd -q $dir
-
-	if [[ $untracked_dirty = 0 ]]; then
-		command git diff --no-ext-diff --quiet --exit-code
-	else
-		test -z "$(command git status --porcelain --ignore-submodules -unormal)"
-	fi
-
-	return $?
-}
-
-prompt_pure_async_git_fetch() {
-	setopt localoptions noshwordsplit
-	# use cd -q to avoid side effects of changing directory, e.g. chpwd hooks
-	builtin cd -q $1
-
-	# set GIT_TERMINAL_PROMPT=0 to disable auth prompting for git fetch (git 2.3+)
-	export GIT_TERMINAL_PROMPT=0
-	# set ssh BachMode to disable all interactive ssh password prompting
-	export GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-"ssh -o BatchMode=yes"}
-
-	command git -c gc.auto=0 fetch &>/dev/null || return 1
-
-	# check arrow status after a successful git fetch
-	prompt_pure_async_git_arrows $1
-}
-
-prompt_pure_async_git_arrows() {
-	setopt localoptions noshwordsplit
-	builtin cd -q $1
-	command git rev-list --left-right --count HEAD...@'{u}'
-}
-
-prompt_pure_async_tasks() {
-	setopt localoptions noshwordsplit
-
-	# initialize async worker
-	((!${prompt_pure_async_init:-0})) && {
-		async_start_worker "prompt_pure" -u -n
-		async_register_callback "prompt_pure" prompt_pure_async_callback
-		prompt_pure_async_init=1
-	}
-
-	# store working_tree without the "x" prefix
-	local working_tree="${vcs_info_msg_1_#x}"
-
-	# check if the working tree changed (prompt_pure_current_working_tree is prefixed by "x")
-	if [[ ${prompt_pure_current_working_tree#x} != $working_tree ]]; then
-		# stop any running async jobs
-		async_flush_jobs "prompt_pure"
-
-		# reset git preprompt variables, switching working tree
-		unset prompt_pure_git_dirty
-		unset prompt_pure_git_last_dirty_check_timestamp
-		prompt_pure_git_arrows=
-
-		# set the new working tree and prefix with "x" to prevent the creation of a named path by AUTO_NAME_DIRS
-		prompt_pure_current_working_tree="x${working_tree}"
-	fi
-
-	# only perform tasks inside git working tree
-	[[ -n $working_tree ]] || return
-
-	async_job "prompt_pure" prompt_pure_async_git_arrows $working_tree
-
-	# do not preform git fetch if it is disabled or working_tree == HOME
-	if (( ${PURE_GIT_PULL:-1} )) && [[ $working_tree != $HOME ]]; then
-		# tell worker to do a git fetch
-		async_job "prompt_pure" prompt_pure_async_git_fetch $working_tree
-	fi
-
-	# if dirty checking is sufficiently fast, tell worker to check it again, or wait for timeout
-	integer time_since_last_dirty_check=$(( EPOCHSECONDS - ${prompt_pure_git_last_dirty_check_timestamp:-0} ))
-	if (( time_since_last_dirty_check > ${PURE_GIT_DELAY_DIRTY_CHECK:-1800} )); then
-		unset prompt_pure_git_last_dirty_check_timestamp
-		# check check if there is anything to pull
-		async_job "prompt_pure" prompt_pure_async_git_dirty ${PURE_GIT_UNTRACKED_DIRTY:-1} $working_tree
-	fi
-}
-
-prompt_pure_check_git_arrows() {
-	setopt localoptions noshwordsplit
-	local arrows left=${1:-0} right=${2:-0}
-
-	(( right > 0 )) && arrows+=${PURE_GIT_DOWN_ARROW:-⇣}
-	(( left > 0 )) && arrows+=${PURE_GIT_UP_ARROW:-⇡}
-
-	[[ -n $arrows ]] || return
-	typeset -g REPLY=" $arrows"
-}
-
-prompt_pure_async_callback() {
-	setopt localoptions noshwordsplit
-	local job=$1 code=$2 output=$3 exec_time=$4
-
-	case $job in
-		prompt_pure_async_git_dirty)
-			local prev_dirty=$prompt_pure_git_dirty
-			if (( code == 0 )); then
-				prompt_pure_git_dirty=
-			else
-				prompt_pure_git_dirty="*"
-			fi
-
-			[[ $prev_dirty != $prompt_pure_git_dirty ]] && prompt_pure_preprompt_render
-
-			# When prompt_pure_git_last_dirty_check_timestamp is set, the git info is displayed in a different color.
-			# To distinguish between a "fresh" and a "cached" result, the preprompt is rendered before setting this
-			# variable. Thus, only upon next rendering of the preprompt will the result appear in a different color.
-			(( $exec_time > 2 )) && prompt_pure_git_last_dirty_check_timestamp=$EPOCHSECONDS
-			;;
-		prompt_pure_async_git_fetch|prompt_pure_async_git_arrows)
-			# prompt_pure_async_git_fetch executes prompt_pure_async_git_arrows
-			# after a successful fetch.
-			if (( code == 0 )); then
-				local REPLY
-				prompt_pure_check_git_arrows ${(ps:\t:)output}
-				if [[ $prompt_pure_git_arrows != $REPLY ]]; then
-					prompt_pure_git_arrows=$REPLY
-					prompt_pure_preprompt_render
-				fi
-			fi
-			;;
-	esac
 }
 
 prompt_pure_setup() {
