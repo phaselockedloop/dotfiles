@@ -66,6 +66,7 @@
 (package! org-bullets)
 (package! robe-mode :disable t)
 (package! rubocop :disable t)
+(package! rainbow-mode)
 (package! shadowenv :disable t)
 (package! so-long :disable t)
 (package! spell-fu :disable t)
