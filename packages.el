@@ -71,3 +71,4 @@
 (package! so-long :disable t)
 (package! spell-fu :disable t)
 (package! super-save)
+(package! origami)

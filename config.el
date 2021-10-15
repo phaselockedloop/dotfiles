@@ -172,3 +172,4 @@
 
 (setq gc-cons-threshold most-positive-fixnum)
 (add-hook 'after-init-hook (lambda() (setq gc-cons-threshold 1000000)))
+(setq native-comp-async-report-warnings-errors nil)
