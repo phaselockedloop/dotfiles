@@ -29,7 +29,7 @@ export PURE_GIT_PULL=0
 export SHELL="/bin/zsh"
 export TERM='xterm-256color'
 
-export LANGUAGE=en_US.UTF-8
+export LANGUAGE=en_US:en
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_TYPE=en_US.UTF-8
@@ -133,3 +133,5 @@ autoload -U +X bashcompinit && bashcompinit
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
