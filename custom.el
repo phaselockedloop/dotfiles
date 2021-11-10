@@ -358,7 +358,7 @@ Use the C-u prefix to prevent the etags-select window from closing."
       (switch-to-buffer etags-select-source-buffer)
       (if etags-select-use-xemacs-etags-p
           (push-tag-mark)
-        (ring-insert find-tag-marker-ring (point-marker)))
+        (xref-push-marker-stack))
       (if other-window
           (find-file-other-window filename)
         (find-file filename))
