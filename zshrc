@@ -86,6 +86,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
 [ -s "/usr/local/bin/bit" ]                                                                  && complete -o nospace -C /usr/local/bin/bit bit
+[ -s "/opt/rubies/3.0.1-pshopify2/bin/" ]                                                    && export PATH="/opt/rubies/3.0.1-pshopify2/bin/"
 
 alias vi=nvim
 alias vim=nvim
