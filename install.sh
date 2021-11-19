@@ -30,22 +30,11 @@ ln -sf ~/dotfiles/koehler2.vim ~/.config/nvim/colors/koehler2.vim
 mkdir -p ~/bin
 cd ~/bin
 wget https://github.com/mroth/scmpuff/releases/download/v0.3.0/scmpuff_0.3.0_linux_x64.tar.gz
-tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
+tar xzvf scmpuff_0.3.0_linux_x64.tar.gz &
 
 # tldr
-sudo npm install -g tldr
-
-# purer
-git clone https://github.com/DFurnes/purer ~/purer
-ln -s ~/purer/pure.zsh ~/purer/purer.plugin.zsh 
-ln -s ~/purer/pure.zsh ~/purer/prompt_purer_setup
-ln -s ~/purer/async.zsh ~/purer/async
+sudo npm install -g tldr &
 
 # Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-$HOME/.cargo/bin/cargo install sccache
-echo "[build]" >> $HOME/.cargo/config
-SCCACHE_PATH=$HOME/.cargo/bin/sccache
-echo "rustc-wrapper = \"$SCCACHE_PATH\"" >> $HOME/.cargo/config
-$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep
-$HOME/.cargo/bin/cargo install broot topgrade xsv git-delta just exa cargo-update dijo
+$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta
