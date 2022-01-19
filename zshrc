@@ -1,7 +1,7 @@
 # -*- sh -*-
 [ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
 
-export CONFIG_DIR=$HOME/dotfiles
+export CONFIG_DIR=dotfiles
 
 export ZSH_DISABLE_COMPFIX=true
 export DISABLE_UPDATE_PROMPT=true
@@ -39,7 +39,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
+plugins=(git gitfast tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,8 +51,6 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
 
 setopt EXTENDEDGLOB
-
-autoload bashcompinit && bashcompinit
 
 bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
@@ -97,6 +95,9 @@ alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset 
 alias grsh="git reset --hard"
 alias c="cd ~/src"
 alias gs="git status"
+alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
+alias tree="lsd --tree"
+
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
 }
@@ -121,13 +122,10 @@ rglt() {
   rg -g "*.rb" -p "$1" | less
 }
 
-fpath+=($fpath $HOME'/dotfiles/purer-prompt/functions')
+fpath+=$HOME/$CONFIG_DIR'/purer-prompt/functions'
 
 autoload -U promptinit; promptinit
 prompt purer
-
-[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
-#zprof
 
 autoload -U +X bashcompinit && bashcompinit
 
@@ -135,4 +133,11 @@ autoload -U +X bashcompinit && bashcompinit
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
 
-[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
+[ -f "/Users/andrewknowles/.ghcup/env" ] && source "/Users/andrewknowles/.ghcup/env" # ghcup-env
+
+[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
+
+#zprof
+[ -f "/Users/andrewknowles/.ghcup/env" ] && source "/Users/andrewknowles/.ghcup/env" # ghcup-env
