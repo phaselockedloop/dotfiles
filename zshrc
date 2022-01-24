@@ -72,6 +72,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
 [ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
 [ -s "$HOME/.zsh/plugins/bd/bd.zsh" ]                                                        && source "$HOME/.zsh/plugins/bd/bd.zsh"
+[ -s "$HOME/.ghcup/env" ]                                                                    && source "$HOME/.ghcup/env"
 
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
@@ -135,9 +136,6 @@ autoload -U +X bashcompinit && bashcompinit
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
-[ -f "/Users/andrewknowles/.ghcup/env" ] && source "/Users/andrewknowles/.ghcup/env" # ghcup-env
-
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
 #zprof
-[ -f "/Users/andrewknowles/.ghcup/env" ] && source "/Users/andrewknowles/.ghcup/env" # ghcup-env
