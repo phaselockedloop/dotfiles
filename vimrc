@@ -65,3 +65,4 @@ nnoremap <silent> <F5> :call fzf#run({
 set ttimeout
 set ttimeoutlen=100
 set timeoutlen=3000
+set spelllang=en_ca

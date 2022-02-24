@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(load "~/dotfiles/custom.el" 'noerror)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -60,6 +61,7 @@
 
 (load "~/extras.elc" 'noerror)
 
+(require 'etags)
 (require 'server)
 (if (not (server-running-p)) (server-start))
 

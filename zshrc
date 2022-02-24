@@ -103,7 +103,7 @@ gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
 }
 
-if [ -x "$(command -v foo)" ]; then
+if [ -x "$(command -v scmpuff)" ]; then
   eval "$(scmpuff init -s)"
 fi
 

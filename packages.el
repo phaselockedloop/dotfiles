@@ -55,7 +55,6 @@
 (package! diff-hl)
 (package! dumb-jump :disable t)
 (package! elpy :disable t)
-(package! etags-select :disable t)
 (package! enh-ruby-mode)
 (package! flycheck :disable t)
 (package! flyspell-mode :disable t)
