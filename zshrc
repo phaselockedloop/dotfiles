@@ -38,6 +38,7 @@ export GPG_TTY=$(tty)
 export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+[ -s "/usr/local/bin/fzf" ] && export FZF_BASE="/usr/local/bin/fzf"
 
 plugins=(git gitfast tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
