@@ -23,8 +23,11 @@ prompt_pure_preprompt_render() {
 	local path_formatting="${PURE_PROMPT_PATH_FORMATTING:-%c}"
 	preprompt+="%B%F{$STATUS_COLOR}$path_formatting%f%b"
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}%f"
-	if [[ -v SPIN_INSTANCE_FQDN ]]; then
-		preprompt+=" %F{red}$SPIN_INSTANCE_FQDN"
+    FQDN_PATH="/etc/spin/machine/fqdn"
+
+	if [[ -s $FQDN_PATH ]]; then
+        PLACE=`cat $FQDN_PATH | sed "s/\\..*//"`
+		preprompt+=" %F{red}$PLACE"
 	else
 		preprompt+=$prompt_pure_username
 	fi
