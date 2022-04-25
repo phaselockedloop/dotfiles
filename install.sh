@@ -42,3 +42,8 @@ sudo npm install -g tldr &
 # Rust
 $BASEDIR/rustup.sh -y
 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta
+
+
+# Update git diff
+echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
+
