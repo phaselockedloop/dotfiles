@@ -25,3 +25,7 @@
     prune = false
 [include]
     path = ~/.git-work.conf
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
