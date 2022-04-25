@@ -39,11 +39,9 @@ tar xzvf scmpuff_0.3.0_linux_x64.tar.gz &
 # tldr
 sudo npm install -g tldr &
 
-# Rust
-$BASEDIR/rustup.sh -y
-$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta
-
-
 # Update git diff
 echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 
+# Rust
+$BASEDIR/rustup.sh -y
+$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta &
