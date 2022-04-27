@@ -26,7 +26,7 @@ prompt_pure_preprompt_render() {
     FQDN_PATH="/etc/spin/machine/fqdn"
 
 	if [[ -s $FQDN_PATH ]]; then
-        PLACE=`cat $FQDN_PATH | sed "s/\\..*//"`
+        PLACE=`/bin/cat $FQDN_PATH | sed "s/\\..*//"`
 		preprompt+=" %F{red}$PLACE"
 	else
 		preprompt+=$prompt_pure_username
