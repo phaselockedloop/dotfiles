@@ -9,6 +9,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 $BASEDIR/ohmyzsh.sh --unattended
 git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+# forgit
+mkdir -p ~/bin
+git clone --depth 1 https://github.com/wfxr/forgit ~/bin/forgit
+
 # misc installs
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
 sudo apt-get -y install neovim wget npm fzf htop

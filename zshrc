@@ -67,13 +67,14 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 [ -s "$HOME/$CONFIG_DIR/tmuxinator.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/tmuxinator.zsh"
 [ -s "$HOME/$CONFIG_DIR/paste_hell.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/paste_hell.zsh"
-[ -s "$HOME/.iterm2_shell_integration.zsh" ]                                                 && source "$HOME/.iterm2_shell_integration.zsh"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
 [ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
 [ -s "$HOME/.zsh/plugins/bd/bd.zsh" ]                                                        && source "$HOME/.zsh/plugins/bd/bd.zsh"
 [ -s "$HOME/.ghcup/env" ]                                                                    && source "$HOME/.ghcup/env"
+[ -f "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
+[ -f "$HOME/bin/forgit/forgit.plugin.zsh" ]                                                  && source "$HOME/bin/forgit/forgit.plugin.zsh"
 
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
@@ -85,8 +86,10 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 [ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
-[ -s "/usr/local/bin/bit" ]                                                                  && complete -o nospace -C /usr/local/bin/bit bit
 [ -s "/opt/rubies/3.0.1-pshopify2/bin/" ]                                                    && export PATH="/opt/rubies/3.0.1-pshopify2/bin/":$PATH
+[ -s "$HOME/Library/Python/3.9/bin" ]                                                        && export PATH="$HOME/Library/Python/3.9/bin":$PATH
+
+[ -s "/usr/local/bin/bit" ]                                                                  && complete -o nospace -C /usr/local/bin/bit bit
 
 alias vi=nvim
 alias vim=nvim
@@ -131,8 +134,6 @@ autoload -U promptinit; promptinit
 prompt purer
 
 autoload -U +X bashcompinit && bashcompinit
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
 
