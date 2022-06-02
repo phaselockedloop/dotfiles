@@ -219,8 +219,8 @@ Only works with GNU Emacs."
 (defun enh-ruby-mode-find-tag ()
   (let (beg end)
     (save-excursion
-      (setq beg (progn (search-backward-regexp "[^a-zA-Z\?_]") (forward-char) (point))
-            end (progn (search-forward-regexp "[^a-zA-Z\?_]") (backward-char) (point)))
+      (setq beg (progn (search-backward-regexp "[^a-zA-Z\?_0-9]") (forward-char) (point))
+            end (progn (search-forward-regexp "[^a-zA-Z\?_0-9]") (backward-char) (point)))
        (buffer-substring-no-properties beg end))))
 
 (defun etags-select-find-tag-at-point ()

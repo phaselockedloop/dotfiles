@@ -38,7 +38,6 @@ export GPG_TTY=$(tty)
 export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-[ -s "/usr/local/bin/fzf" ] && export FZF_BASE="/usr/local/bin/fzf"
 
 plugins=(git gitfast tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
@@ -113,11 +112,11 @@ if [ -x "$(command -v scmpuff)" ]; then
 fi
 
 delete-branches() {
-  git branch |
+  results=$(git branch |
     grep --invert-match '\*' |
     cut -c 3- |
-    fzf --multi --preview="git log {}" |
-    gxargs --no-run-if-empty git branch --delete --force
+    fzf --multi --preview="git log --no-merges --color --stat -p {}")
+    test "$results" && git branch --delete --force $results
 }
 
 rgl() {
