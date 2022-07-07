@@ -48,4 +48,6 @@ echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 
 # Rust
 $BASEDIR/rustup.sh -y
+rustup default nightly
+rustup update
 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta &
