@@ -138,6 +138,12 @@ autoload -U +X bashcompinit && bashcompinit
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
+tere() {
+    local result=$($HOME/.cargo/bin/tere "$@")
+    [ -n "$result" ] && cd -- "$result"
+}
+
+
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
 #zprof
