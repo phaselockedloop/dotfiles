@@ -76,6 +76,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 [ -f "$HOME/bin/forgit/forgit.plugin.zsh" ]                                                  && source "$HOME/bin/forgit/forgit.plugin.zsh"
 
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
+[ -s "$HOME/.rust/bin" ]                                                                     && export PATH="$HOME/.rust/bin":$PATH
 [ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
 [ -s "$HOME/tools" ]                                                                         && export PATH="$HOME/tools":$PATH
 [ -s "$HOME/bin" ]                                                                           && export PATH="$HOME/bin":$PATH
