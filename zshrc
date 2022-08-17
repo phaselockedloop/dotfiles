@@ -124,6 +124,10 @@ rgl() {
   rg -B5 -A5 -g "*.rb" -g"!*test*" -p "$1" | less
 }
 
+rglc() {
+  rg -B5 -A5 -g "*.rb" -g"!*test*" -p "$1" "$2" | less
+}
+
 rglt() {
   rg -g "*.rb" -p "$1" | less
 }

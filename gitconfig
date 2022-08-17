@@ -1,20 +1,12 @@
 [user]
     email = andrew.knowles@gmail.com
     name = Andrew Knowles
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
 [core]
     commitGraph = true
-    pager = delta
     excludesfile = ~/.gitignore_global
     editor = nvim
 [diff]
     algorithm = patience
-[gc]
-    writeCommitGraph = true
 [protocol]
     version = 2
 [init]
@@ -22,10 +14,4 @@
 [pull]
     ff = only
 [fetch]
-    prune = false
-[include]
-    path = ~/.git-work.conf
-[delta]
-    navigate = true
-    side-by-side = true
-    line-numbers = true
+    prune = true
