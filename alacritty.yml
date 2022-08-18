@@ -6,9 +6,7 @@
 # file being loaded last. If a field is already present in a previous import, it
 # will be replaced.
 #
-# All imports must either be absolute paths starting with `/`, or paths relative
-# to the user's home directory starting with `~/`.
-#import:
+# All imports must either be absolute paths starting with `/`, or paths relative to the user's home directory starting with `~/`. import:
 #  - /path/to/alacritty.yml
 
 # Any items in the `env` entry below will be added as
@@ -762,7 +760,7 @@ alt_send_esc: true
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-key_bindings: 
+key_bindings:
   - { key: B,         mods: Alt,       chars: "\x1bb"          }
   - { key: F,         mods: Alt,       chars: "\x1bf"          }
   - { key: W,         mods: Alt,       chars: "\x1bw"          }

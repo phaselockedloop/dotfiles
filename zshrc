@@ -22,7 +22,9 @@ export DISABLE_AUTO_UPDATE="true"
 export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+#export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_STRATEGY=()
+export ZSH_AUTOSUGGEST_STRATEGY=()
 export PURE_PROMPT_PATH_FORMATTING=%~
 export PURE_GIT_PULL=0
 
@@ -39,7 +41,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git gitfast tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
+plugins=(git gitfast tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,9 +58,7 @@ bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
 bindkey '^ ' autosuggest-accept
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 [ -s "/usr/local/bin/nvim" ]                                                                 && export EDITOR="/usr/local/bin/nvim"
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
@@ -148,6 +148,11 @@ tere() {
     [ -n "$result" ] && cd -- "$result"
 }
 
+export LS_COLORS="$(vivid generate molokai)"
+export ZLS_COLORS=$LS_COLORS
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+enable-fzf-tab
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
