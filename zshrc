@@ -26,6 +26,10 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export PURE_PROMPT_PATH_FORMATTING=%~
 export PURE_GIT_PULL=0
 
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+
 export SHELL="/bin/zsh"
 export TERM='xterm-256color'
 
