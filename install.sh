@@ -47,6 +47,7 @@ echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 # Rust
 [ -s "$HOME/.rust" ] && ln -s $HOME/.rust $HOME/.cargo
 $HOME/.cargo/bin/rustup update stable
+$HOME/.cargo/bin/rustup default stable
 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid &
 
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove
