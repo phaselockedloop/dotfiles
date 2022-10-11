@@ -3,16 +3,16 @@
 BASEDIR="$(cd "$(dirname "$0")"; pwd)";
 
 # tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm &
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # oh-my-zsh
 $BASEDIR/ohmyzsh.sh --unattended
-git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &
-git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab &
+git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
 # forgit
 mkdir -p ~/bin
-git clone --depth 1 https://github.com/wfxr/forgit ~/bin/forgit &
+git clone --depth 1 https://github.com/wfxr/forgit ~/bin/forgit
 
 # misc installs
 sudo apt-get -y install neovim wget npm fzf htop
@@ -36,10 +36,10 @@ ln -sf ~/dotfiles/koehler2.vim ~/.config/nvim/colors/koehler2.vim
 mkdir -p ~/bin
 cd ~/bin
 wget https://github.com/mroth/scmpuff/releases/download/v0.3.0/scmpuff_0.3.0_linux_x64.tar.gz
-tar xzvf scmpuff_0.3.0_linux_x64.tar.gz &
+tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
 
 # tldr
-sudo npm install -g tldr &
+sudo npm install -g tldr
 
 # Update git diff
 echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
@@ -48,6 +48,6 @@ echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 [ -s "$HOME/.rust" ] && ln -s $HOME/.rust $HOME/.cargo
 $HOME/.cargo/bin/rustup update stable
 $HOME/.cargo/bin/rustup default stable
-$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid &
+$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid
 
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove
