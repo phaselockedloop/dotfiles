@@ -182,4 +182,4 @@
        :config
        ;;literate
        (default +bindings +smartparens)
-       (pretty-code +iosevka))
+       )

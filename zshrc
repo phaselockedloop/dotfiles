@@ -150,7 +150,7 @@ tere() {
     [ -n "$result" ] && cd -- "$result"
 }
 
-export LS_COLORS="$(vivid generate molokai)"
+export LS_COLORS="$(vivid --color-mode 8-bit generate molokai)"
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
