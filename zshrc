@@ -43,7 +43,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git gitfast tmuxinator tmux fzf zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails fzf-tab)
+plugins=(git gitfast tmuxinator tmux fzf fzf-tab zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -153,6 +153,8 @@ tere() {
 export LS_COLORS="$(vivid --color-mode 8-bit generate molokai)"
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
 enable-fzf-tab
 
