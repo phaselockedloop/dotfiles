@@ -105,6 +105,9 @@ alias gs="git status"
 alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 alias tree="lsd --tree"
 alias mig="DISABLE_SPRING=1 bin/rails db:migrate db:test:prepare"
+alias myprs='gh pr list -S '\''is:open is:pr author:jameskieley archived:false'\'
+alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
+
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
