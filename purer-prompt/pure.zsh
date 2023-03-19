@@ -27,7 +27,7 @@ prompt_pure_preprompt_render() {
 
 	if [[ -s $FQDN_PATH ]]; then
         PLACE=`/bin/cat $FQDN_PATH | sed "s/\\..*//"`
-		preprompt+=" %F{blue}*SPIN* $PLACE"
+		preprompt+=" 🔀 %F{yellow}$PLACE"
 	else
 		preprompt+=$prompt_pure_username
 	fi
