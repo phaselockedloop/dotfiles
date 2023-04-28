@@ -23,7 +23,6 @@ ln -sf ~/dotfiles/zshrc ~/.zshrc
 ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 
 # Neovim
-
 mkdir -p ~/.local/share/nvim/site/autoload
 mkdir -p ~/.config/nvim/colors
 
@@ -45,7 +44,8 @@ sudo npm install -g tldr
 echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 
 # Rust
-[ -s "$HOME/.rust" ] && ln -s $HOME/.rust $HOME/.cargo
+mkdir -p $HOME/cargo
+[ -s "$HOME/.rust/bin" ] && ln -s $HOME/.rust/bin $HOME/.cargo/bin
 $HOME/.cargo/bin/rustup update stable
 $HOME/.cargo/bin/rustup default stable
 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid
