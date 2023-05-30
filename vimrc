@@ -66,3 +66,4 @@ set ttimeout
 set ttimeoutlen=100
 set timeoutlen=3000
 set spelllang=en_ca
+set guicursor-=a:blinkon0

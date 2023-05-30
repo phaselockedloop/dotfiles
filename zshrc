@@ -43,7 +43,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-plugins=(git gitfast tmuxinator tmux fzf fzf-tab zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
+plugins=(git gitfast tmux fzf fzf-tab zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -66,16 +66,11 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
 [ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
-[ -s "$HOME/$CONFIG_DIR/tmuxinator.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/tmuxinator.zsh"
 [ -s "$HOME/$CONFIG_DIR/paste_hell.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/paste_hell.zsh"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-[ -s "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br" ]                        && source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
-[ -s "$HOME/.config/broot/launcher/bash/br" ]                                                && source "$HOME/.config/broot/launcher/bash/br"
-[ -s "$HOME/.zsh/plugins/bd/bd.zsh" ]                                                        && source "$HOME/.zsh/plugins/bd/bd.zsh"
 [ -s "$HOME/.ghcup/env" ]                                                                    && source "$HOME/.ghcup/env"
 [ -f "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
-[ -f "$HOME/bin/forgit/forgit.plugin.zsh" ]                                                  && source "$HOME/bin/forgit/forgit.plugin.zsh"
 
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "$HOME/.rust/bin" ]                                                                     && export PATH="$HOME/.rust/bin":$PATH
@@ -107,7 +102,6 @@ alias tree="lsd --tree"
 alias mig="DISABLE_SPRING=1 bin/rails db:migrate db:test:prepare"
 alias myprs='gh pr list -S '\''is:open is:pr author:jameskieley archived:false'\'
 alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
-
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
@@ -162,5 +156,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 enable-fzf-tab
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
+
+if [ "$TERM_PROGRAM" = tmux ]; then
+    $HOME/$CONFIG_DIR/fix_blink.sh
+fi
 
 #zprof
