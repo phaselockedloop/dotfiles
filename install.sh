@@ -15,7 +15,7 @@ mkdir -p ~/bin
 git clone --depth 1 https://github.com/wfxr/forgit ~/bin/forgit
 
 # misc installs
-sudo apt-get -y install neovim wget npm fzf htop
+sudo apt-get -y install neovim wget npm fzf htop mold clang
 
 # Dotfiles
 ln -sf ~/dotfiles/vimrc ~/.vimrc
@@ -30,6 +30,10 @@ ln -sf ~/dotfiles/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
 ln -sf ~/dotfiles/vimrc ~/.config/nvim/init.vim
 ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/koehler2.vim ~/.config/nvim/colors/koehler2.vim
+
+# mold
+echo "\n" >> ~/.cargo/config
+cat ~/dotfiles/cargo_config >> ~/.cargo/config
 
 # scm puff
 mkdir -p ~/bin
