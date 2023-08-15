@@ -43,6 +43,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
+export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
 plugins=(git gitfast tmux fzf fzf-tab zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
 
@@ -149,7 +150,7 @@ tere() {
     [ -n "$result" ] && cd -- "$result"
 }
 
-export LS_COLORS="$(vivid --color-mode 8-bit generate molokai)"
+export LS_COLORS="$(vivid --color-mode 24-bit generate molokai)"
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
@@ -167,6 +168,14 @@ function _fzf_complete_dt() {
     _fzf_complete --prompt="test:" -- "$@" < <(
         fd -t f -p "_test.rb" components/*/test
     )
+}
+
+function _fzf_compgen_path() {
+    rg --files --glob "!.git" . "$1"
+}
+
+function _fzf_compgen_dir() {
+   fd --color always --type d --hidden --follow --exclude ".git" . "$1"
 }
 
 #zprof
