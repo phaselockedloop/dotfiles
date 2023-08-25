@@ -105,6 +105,7 @@ alias mig="DISABLE_SPRING=1 bin/rails db:migrate db:test:prepare"
 alias myprs='gh pr list -S '\''is:open is:pr author:jameskieley archived:false'\'
 alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
 alias dt="dev test"
+alias force_remote='git fetch origin && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
