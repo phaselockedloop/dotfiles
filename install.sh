@@ -52,6 +52,6 @@ mkdir -p $HOME/cargo
 [ -s "$HOME/.rust/bin" ] && ln -s $HOME/.rust/bin $HOME/.cargo/bin
 $HOME/.cargo/bin/rustup update stable
 $HOME/.cargo/bin/rustup default stable
-$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid
+$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic
 
 sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove
