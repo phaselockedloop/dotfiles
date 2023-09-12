@@ -45,7 +45,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
-plugins=(git gitfast tmux fzf fzf-tab zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails)
+plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,11 +102,12 @@ alias gs="git status"
 alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 alias tree="lsd --tree"
 alias mig="DISABLE_SPRING=1 bin/rails db:migrate db:test:prepare"
-alias myprs='gh pr list -S '\''is:open is:pr author:jameskieley archived:false'\'
+alias myprs='gh pr list -S '\''is:open is:pr author:@me archived:false'\'
 alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
 alias dt="dev test"
 alias force_remote='git fetch origin && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
 alias clean_local_branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
+alias rebase_remote_main='git fetch origin main && git rebase origin/main && git push -f'
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
@@ -156,9 +157,11 @@ export LS_COLORS="$(vivid --color-mode 24-bit generate molokai)"
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 enable-fzf-tab
+
+[ -s "$HOME/bin/fzf-git.sh" ] && source "$HOME/bin/fzf-git.sh"
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
@@ -181,5 +184,3 @@ function _fzf_compgen_dir() {
 }
 
 #zprof
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
