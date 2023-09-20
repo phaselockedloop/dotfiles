@@ -3,12 +3,12 @@
 BASEDIR="$(cd "$(dirname "$0")"; pwd)";
 
 # tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # oh-my-zsh
 $BASEDIR/ohmyzsh.sh --unattended
 git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+git clone --depth 1 https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
 # forgit
 mkdir -p ~/bin

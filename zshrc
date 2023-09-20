@@ -113,9 +113,6 @@ gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
 }
 
-if [ -x "$(command -v scmpuff)" ]; then
-  eval "$(scmpuff init -s)"
-fi
 
 delete-branches() {
   results=$(git branch |
@@ -147,6 +144,10 @@ autoload -U +X bashcompinit && bashcompinit
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
+if [ -x "$(command -v scmpuff)" ]; then
+  eval "$(scmpuff init -s)"
+fi
 
 tere() {
     local result=$($HOME/.cargo/bin/tere "$@")
