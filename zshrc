@@ -92,7 +92,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 alias vi=nvim
 alias vim=nvim
-alias l="lsd -A1tlrh --blocks permission,size,date,name"
+alias l="lsd -A1tlrh --blocks size,date,name"
 alias gfz="git fuzzy"
 alias cat="bat"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
