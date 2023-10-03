@@ -72,7 +72,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 [ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/.ghcup/env" ]                                                                    && source "$HOME/.ghcup/env"
-[ -f "$HOME/.fzf.zsh" ]                                                                      && source "$HOME/.fzf.zsh"
 
 [ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
 [ -s "$HOME/.rust/bin" ]                                                                     && export PATH="$HOME/.rust/bin":$PATH
@@ -183,5 +182,8 @@ function _fzf_compgen_path() {
 function _fzf_compgen_dir() {
    fd --color always --type d --hidden --follow --exclude ".git" . "$1"
 }
+
+source "$HOME/$CONFIG_DIR/completion.zsh"
+source "$HOME/$CONFIG_DIR/key-bindings.zsh"
 
 #zprof
