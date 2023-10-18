@@ -173,3 +173,7 @@
 (setq gc-cons-threshold most-positive-fixnum)
 (add-hook 'after-init-hook (lambda() (setq gc-cons-threshold 1000000)))
 (setq native-comp-async-report-warnings-errors nil)
+(global-visual-line-mode t)
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#444444")
+(set-face-foreground 'highlight nil)
