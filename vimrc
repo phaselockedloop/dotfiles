@@ -5,10 +5,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'editorconfig/editorconfig-vim'
+" Plug 'pseewald/vim-anyfold'
+Plug 'arecarn/vim-fold-cycle'
 call plug#end()
 syntax on
 set novisualbell
@@ -43,6 +45,16 @@ set encoding=utf-8
 set cursorline
 map <C-t> :NERDTreeToggle<CR>
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+set foldmethod=indent
+" set foldexpr=MyFoldLevel(v:lnum)
+
+function! MyFoldLevel(lnum)
+    let line = getline(a:lnum)
+    if line =~ '^\\s\\+'  " matches any line that starts with one or more spaces
+        return '>1'
+    endif
+    return '0'
+endfunction
 
 function! s:buflist()
   redir => ls

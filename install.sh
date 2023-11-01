@@ -15,7 +15,7 @@ mkdir -p ~/bin
 git clone --depth 1 https://github.com/wfxr/forgit ~/bin/forgit
 
 # misc installs
-sudo apt-get -y install neovim wget npm fzf htop mold clang
+sudo apt-get -y install neovim wget npm htop mold clang
 
 # Dotfiles
 ln -sf ~/dotfiles/vimrc ~/.vimrc
@@ -50,3 +50,7 @@ mkdir -p $HOME/cargo
 $HOME/.cargo/bin/rustup update stable
 $HOME/.cargo/bin/rustup default stable
 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic
+
+# FZF
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all

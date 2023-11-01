@@ -63,6 +63,12 @@
 (require 'server)
 (if (not (server-running-p)) (server-start))
 
+(defun run-script-on-file (script-path)
+  (interactive "FScript path: ")
+  (let ((file-path (buffer-file-name)))
+    (shell-command (concat script-path " " file-path))
+    (revert-buffer :ignore-auto :noconfirm)))
+
 (defun my-done ()
   "Exit server buffers and hide the main Emacs window"
   (interactive)
@@ -71,6 +77,7 @@
 
 (global-set-key (kbd "C-x C-c") 'my-done)
 (global-set-key (kbd "C-M-c") 'save-buffers-kill-emacs)
+(global-set-key (kbd "C-x C-k") 'run-script-on-file)
 
 (setq doom-theme 'doom-megadark+)
 
@@ -177,3 +184,5 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#444444")
 (set-face-foreground 'highlight nil)
+(setq outline-regexp " *")
+(setq-default tab-width 2)
