@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'cespare/vim-toml'
@@ -8,7 +8,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'editorconfig/editorconfig-vim'
 " Plug 'pseewald/vim-anyfold'
 Plug 'arecarn/vim-fold-cycle'
 call plug#end()
