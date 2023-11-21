@@ -44,7 +44,7 @@ set encoding=utf-8
 set cursorline
 map <C-t> :NERDTreeToggle<CR>
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-set foldmethod=indent
+" set foldmethod=indent
 " set foldexpr=MyFoldLevel(v:lnum)
 
 function! MyFoldLevel(lnum)

@@ -81,6 +81,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 [ -s "$HOME/$CONFIG_DIR" ]                                                                   && export PATH="$HOME/$CONFIG_DIR":$PATH
 [ -s "$HOME/.rbenv/bin/" ]                                                                   && export PATH="$HOME/.rbenv/bin/:$PATH"
 [ -s "$HOME/.emacs.d/bin/" ]                                                                 && export PATH="$HOME/.emacs.d/bin/:$PATH"
+[ -s "$HOME/.config/emacs.d/bin/" ]                                                          && export PATH="$HOME/.config/emacs.d/bin/:$PATH"
 
 [ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
 [ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
