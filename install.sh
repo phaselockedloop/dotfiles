@@ -3,16 +3,16 @@
 BASEDIR="$(cd "$(dirname "$0")"; pwd)";
 
 # tpm
-git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm &
 
 # oh-my-zsh
 $BASEDIR/ohmyzsh.sh --unattended
-git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone --depth 1 https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &
+git clone --depth 1 https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab &
 
 # forgit
 mkdir -p ~/bin
-git clone --depth 1 https://github.com/wfxr/forgit ~/bin/forgit
+git clone --depth 1 https://github.com/wfxr/forgit.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit
 
 # misc installs
 sudo apt-get -y install neovim wget npm htop mold clang
@@ -49,7 +49,7 @@ mkdir -p $HOME/cargo
 [ -s "$HOME/.rust/bin" ] && ln -s $HOME/.rust/bin $HOME/.cargo/bin
 $HOME/.cargo/bin/rustup update stable
 $HOME/.cargo/bin/rustup default stable
-$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic
+$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic &
 
 # FZF
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
