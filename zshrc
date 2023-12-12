@@ -92,6 +92,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 [ -s "$HOME/.fzf/bin" ]                                                                      && export PATH="$HOME/.fzf/bin":$PATH
 
+[ -s "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin" ]                               && export PATH=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin:$PATH
+
 alias vi=nvim
 alias vim=nvim
 alias l="lsd -A1tlrh --blocks size,date,name"
