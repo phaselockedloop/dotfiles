@@ -45,7 +45,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
-plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails fzf-tab)
+plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails fzf-tab forgit)
 
 source $ZSH/oh-my-zsh.sh
 
