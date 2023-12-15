@@ -1,18 +1,21 @@
 #!/usr/bin/env sh
 
-BASEDIR="$(cd "$(dirname "$0")"; pwd)";
+BASEDIR="$(cd "$(dirname "$0")"; pwd)"
+PLUGINS_DIR=~/.oh-my-zsh/custom/plugins
+
+# Directories
+mkdir -p ~/.tmux/plugins ~/bin ~/.local/share/nvim/site/autoload ~/.config/nvim/colors ~/cargo
 
 # tpm
 git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm &
 
 # oh-my-zsh
 $BASEDIR/ohmyzsh.sh --unattended
-git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &
-git clone --depth 1 https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab &
+git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions $PLUGINS_DIR/zsh-autosuggestions &
+git clone --depth 1 https://github.com/Aloxaf/fzf-tab $PLUGINS_DIR/fzf-tab &
 
 # forgit
-mkdir -p ~/bin
-git clone --depth 1 https://github.com/wfxr/forgit.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit
+git clone --depth 1 https://github.com/wfxr/forgit.git $PLUGINS_DIR/forgit
 
 # misc installs
 sudo apt-get -y install neovim wget npm htop mold clang
@@ -21,14 +24,8 @@ sudo apt-get -y install neovim wget npm htop mold clang
 ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/zshrc ~/.zshrc
 ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
-
-# Neovim
-mkdir -p ~/.local/share/nvim/site/autoload
-mkdir -p ~/.config/nvim/colors
-
 ln -sf ~/dotfiles/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
 ln -sf ~/dotfiles/vimrc ~/.config/nvim/init.vim
-ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/koehler2.vim ~/.config/nvim/colors/koehler2.vim
 
 # mold
@@ -36,7 +33,6 @@ echo "\n" >> ~/.cargo/config
 cat ~/dotfiles/cargo_config >> ~/.cargo/config
 
 # scm puff
-mkdir -p ~/bin
 cd ~/bin
 wget https://github.com/mroth/scmpuff/releases/download/v0.3.0/scmpuff_0.3.0_linux_x64.tar.gz
 tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
@@ -45,11 +41,10 @@ tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
 echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 
 # Rust
-mkdir -p $HOME/cargo
 [ -s "$HOME/.rust/bin" ] && ln -s $HOME/.rust/bin $HOME/.cargo/bin
 $HOME/.cargo/bin/rustup update stable
 $HOME/.cargo/bin/rustup default stable
-$HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic &
+nice -n 19 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic &
 
 # FZF
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

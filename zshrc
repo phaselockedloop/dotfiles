@@ -45,7 +45,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
-plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent rbenv ruby rails fzf-tab forgit)
+plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent fzf-tab forgit zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,37 +62,38 @@ bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
 bindkey '^ ' autosuggest-accept
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# Set PATH
+path_dirs=(
+  "/usr/local/sbin"
+  "/usr/local/bin"
+  "/usr/sbin"
+  "/usr/bin"
+  "/sbin"
+  "/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/.rust/bin"
+  "$HOME/src/git-fuzzy/bin"
+  "$HOME/tools"
+  "$HOME/bin"
+  "$HOME/$CONFIG_DIR"
+  "$HOME/.rbenv/bin/"
+  "$HOME/.emacs.d/bin/"
+  "$HOME/.config/emacs.d/bin/"
+  "/usr/local/go/bin"
+  "/opt/rubies/3.0.1-pshopify2/bin/"
+  "$HOME/Library/Python/3.9/bin"
+  "$HOME/.fzf/bin"
+  "$HOME/.oh-my-zsh/custom/plugins/forgit/bin"
+)
+
+for dir in "${path_dirs[@]}"; do
+  [ -s "$dir" ] && export PATH="$dir:$PATH"
+done
 
 [ -s "/usr/local/bin/nvim" ]                                                                 && export EDITOR="/usr/local/bin/nvim"
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
-[ -s "/usr/local/opt/scala" ]                                                                && export SCALA_HOME="/usr/local/opt/scala"
 
-[ -s "$HOME/$CONFIG_DIR/paste_hell.zsh" ]                                                    && source "$HOME/$CONFIG_DIR/paste_hell.zsh"
-[ -s "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]                                                      && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-[ -s "$HOME/.ghcup/env" ]                                                                    && source "$HOME/.ghcup/env"
-
-[ -s "$HOME/.cargo/bin" ]                                                                    && export PATH="$HOME/.cargo/bin":$PATH
-[ -s "$HOME/.rust/bin" ]                                                                     && export PATH="$HOME/.rust/bin":$PATH
-[ -s "$HOME/src/git-fuzzy/bin" ]                                                             && export PATH="$HOME/src/git-fuzzy/bin":$PATH
-[ -s "$HOME/tools" ]                                                                         && export PATH="$HOME/tools":$PATH
-[ -s "$HOME/bin" ]                                                                           && export PATH="$HOME/bin":$PATH
-[ -s "$HOME/$CONFIG_DIR" ]                                                                   && export PATH="$HOME/$CONFIG_DIR":$PATH
-[ -s "$HOME/.rbenv/bin/" ]                                                                   && export PATH="$HOME/.rbenv/bin/:$PATH"
-[ -s "$HOME/.emacs.d/bin/" ]                                                                 && export PATH="$HOME/.emacs.d/bin/:$PATH"
-[ -s "$HOME/.config/emacs.d/bin/" ]                                                          && export PATH="$HOME/.config/emacs.d/bin/:$PATH"
-
-[ -s "/usr/local/bin" ]                                                                      && export PATH="/usr/local/bin":$PATH
-[ -s "/usr/local/go/bin" ]                                                                   && export PATH="/usr/local/go/bin":$PATH
-[ -s "/opt/rubies/3.0.1-pshopify2/bin/" ]                                                    && export PATH="/opt/rubies/3.0.1-pshopify2/bin/":$PATH
-[ -s "$HOME/Library/Python/3.9/bin" ]                                                        && export PATH="$HOME/Library/Python/3.9/bin":$PATH
-
-[ -s "/usr/local/bin/bit" ]                                                                  && complete -o nospace -C /usr/local/bin/bit bit
-
-[ -s "$HOME/.fzf/bin" ]                                                                      && export PATH="$HOME/.fzf/bin":$PATH
-
-[ -s "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin" ]                               && export PATH=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin:$PATH
+source "$HOME/$CONFIG_DIR/paste_hell.zsh"
 
 alias vi=nvim
 alias vim=nvim
@@ -116,7 +117,6 @@ alias rebase_remote_main='git fetch origin main && git rebase origin/main && git
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
 }
-
 
 delete-branches() {
   results=$(git branch |
@@ -153,13 +153,10 @@ if [ -x "$(command -v scmpuff)" ]; then
   eval "$(scmpuff init -s)"
 fi
 
-tere() {
-    local result=$($HOME/.cargo/bin/tere "$@")
-    [ -n "$result" ] && cd -- "$result"
-}
-
-export LS_COLORS="$(vivid --color-mode 24-bit generate molokai)"
-export ZLS_COLORS=$LS_COLORS
+if whence -v vivid > /dev/null 2>&1; then
+  export LS_COLORS="$(vivid --color-mode 24-bit generate molokai)"
+  export ZLS_COLORS=$LS_COLORS
+fi
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
