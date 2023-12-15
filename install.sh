@@ -13,9 +13,8 @@ git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm &
 $BASEDIR/ohmyzsh.sh --unattended
 git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions $PLUGINS_DIR/zsh-autosuggestions &
 git clone --depth 1 https://github.com/Aloxaf/fzf-tab $PLUGINS_DIR/fzf-tab &
-
-# forgit
-git clone --depth 1 https://github.com/wfxr/forgit.git $PLUGINS_DIR/forgit
+git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git $PLUGINS_DIR/zsh-syntax-highlighting &
+git clone --depth 1 https://github.com/wfxr/forgit.git $PLUGINS_DIR/forgit &
 
 # misc installs
 sudo apt-get -y install neovim wget npm htop mold clang
