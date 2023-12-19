@@ -112,7 +112,7 @@ alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
 alias dt="dev test"
 alias force_remote='git fetch origin $(git rev-parse --abbrev-ref HEAD) && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
 alias clean_local_branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
-alias rebase_remote_main='git fetch origin main && git rebase origin/main && git push -f'
+alias rebase_remote_main='git fetch origin main && git rebase origin/main && git push --force-with-lease'
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
@@ -123,7 +123,10 @@ delete-branches() {
     grep --invert-match '\*' |
     cut -c 3- |
     fzf --multi --preview="git log --no-merges --color --stat -p {}")
-    test "$results" && git branch --delete --force $results
+    for branch in $results
+    do
+        git branch --delete --force "$branch"
+    done
 }
 
 rgl() {

@@ -8,6 +8,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'wsdjeg/vim-fetch'
 " Plug 'pseewald/vim-anyfold'
 Plug 'arecarn/vim-fold-cycle'
 call plug#end()

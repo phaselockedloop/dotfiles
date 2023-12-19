@@ -73,7 +73,27 @@
   "Exit server buffers and hide the main Emacs window"
   (interactive)
   (server-edit)
-  (make-frame-invisible nil t))
+
+  (defun keep-duplicates-in-region-or-buffer ()
+  "Keep only duplicate lines in the selected region, or the entire buffer if no region is selected."
+  (interactive)
+  (let* ((begin (if (use-region-p) (region-beginning) (point-min)))
+         (end (if (use-region-p) (region-end) (point-max)))
+         (lines (make-hash-table :test 'equal))
+         duplicates)
+    (save-excursion
+      (goto-char begin)
+      (while (< (point) end)
+        (let ((line (buffer-substring-no-properties
+                     (line-beginning-position)
+                     (line-end-position))))
+          (puthash line (1+ (gethash line lines 0)) lines)
+          (forward-line 1))))
+    (maphash (lambda (k v) (when (> v 1) (push k duplicates))) lines)
+    (delete-region begin end)
+    (goto-char begin)
+    (dolist (line duplicates)
+      (insert line "\n"))))(make-frame-invisible nil t))
 
 (global-set-key (kbd "C-x C-c") 'my-done)
 (global-set-key (kbd "C-M-c") 'save-buffers-kill-emacs)
