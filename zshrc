@@ -79,11 +79,10 @@ path_dirs=(
   "$HOME/.rbenv/bin/"
   "$HOME/.emacs.d/bin/"
   "$HOME/.config/emacs.d/bin/"
-  "/usr/local/go/bin"
-  "/opt/rubies/3.0.1-pshopify2/bin/"
   "$HOME/Library/Python/3.9/bin"
   "$HOME/.fzf/bin"
   "$HOME/.oh-my-zsh/custom/plugins/forgit/bin"
+  "$HOME/.local/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
@@ -157,7 +156,7 @@ if [ -x "$(command -v scmpuff)" ]; then
 fi
 
 if whence -v vivid > /dev/null 2>&1; then
-  export LS_COLORS="$(vivid --color-mode 24-bit generate molokai)"
+  export LS_COLORS="$(vivid --color-mode 8-bit generate molokai)"
   export ZLS_COLORS=$LS_COLORS
 fi
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
