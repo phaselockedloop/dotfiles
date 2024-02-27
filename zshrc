@@ -118,14 +118,13 @@ gbb() {
 }
 
 delete-branches() {
-  results=$(git branch |
-    grep --invert-match '\*' |
-    cut -c 3- |
-    fzf --multi --preview="git log --no-merges --color --stat -p {}")
-    for branch in $results
-    do
-        git branch --delete --force "$branch"
-    done
+  branches=$(git branch --format='%(refname:short)' |
+    grep --invert-match '\*')
+  selected_branches=$(echo "$branches" | fzf --multi --preview="git log --no-merges --color --stat -p {}")
+  for branch in $selected_branches
+  do
+    git branch --delete --force "$branch"
+  done
 }
 
 rgl() {

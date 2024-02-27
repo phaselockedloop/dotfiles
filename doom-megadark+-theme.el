@@ -32,8 +32,8 @@ Can be an integer to determine the exact padding."
    (base5      '("#37474F" "#585858" "black"))
    (base6      '("#237AD3" "#2277DD" "black"))
    (base7      '("#777778" "#767676" "black"))
-   (base8      '("#f4f4f4" "#a8a8a8" "white"))
-   (fg         '("#d4d4d4" "#e4e4e4" "brightwhite"))
+   (base8      '("#F4F4F4" "#A8A8A8" "white"))
+   (fg         '("#D4D4D4" "#E4E4E4" "brightwhite"))
    (fg-alt     '("#AEAFAD" "#bcbcbc" "white"))
 
    (grey base7)
@@ -56,7 +56,7 @@ Can be an integer to determine the exact padding."
    (highlight      base6)
    (vertical-bar   bg-alt)
    (selection      base4)
-   (builtin        magenta)
+   (builtin        cyan)
    (comments       green)
    (doc-comments   base7)
    (constants      blue)
@@ -77,7 +77,7 @@ Can be an integer to determine the exact padding."
    (vc-deleted     red)
 
    ;; custom categories
-   (modeline-bg     (if doom-megadark+-blue-modeline base6 dark-violet))
+   (modeline-bg     (if doom-megadark+-blue-modeline base6 dark-cyan))
    (modeline-bg-alt (doom-darken bg 0.01))
    (modeline-fg     base8)
    (modeline-fg-alt blue)
@@ -125,7 +125,7 @@ Can be an integer to determine the exact padding."
    (dired-k-ignored :foreground cyan)
    (dired-k-added    :foreground vc-added)
    ;;;; doom-modeline
-   (doom-modeline-bar :background (if doom-megadark+-blue-modeline base6 dark-violet))
+   (doom-modeline-bar :background (if doom-megadark+-blue-modeline base6 dark-cyan))
    (doom-modeline-buffer-file :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-major-mode :inherit 'doom-modeline-buffer-path)
    (doom-modeline-buffer-modified :inherit 'mode-line-emphasis :weight 'bold)
@@ -158,6 +158,7 @@ Can be an integer to determine the exact padding."
    ((org-block &override) :background base2)
    ((org-block-background &override) :background base2)
    ((org-block-begin-line &override) :background base2)
+   ((org-level-2 &override) :foreground base8)
    ;;;; org-pomodoro
    (org-pomodoro-mode-line :inherit 'mode-line-emphasis) ; unreadable otherwise
    (org-pomodoro-mode-line-overtime :inherit 'org-pomodoro-mode-line)
