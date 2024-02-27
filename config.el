@@ -137,9 +137,6 @@
       (quote
        (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target" "gems")))
 
-;; (use-package shadowenv
-;;  :hook (after-init . shadowenv-global-mode))
-
 (setq neo-smart-open t)
 (setq neo-window-width 75)
 (doom-themes-neotree-config)
@@ -178,7 +175,6 @@
 (setq confirm-kill-emacs nil)
 (setq large-file-warning-threshold nil)
 (setq etags-select-go-if-unambiguous t)
-;;(global-flycheck-mode)
 (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
 

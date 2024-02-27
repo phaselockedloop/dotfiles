@@ -158,7 +158,7 @@ Can be an integer to determine the exact padding."
    ((org-block &override) :background base2)
    ((org-block-background &override) :background base2)
    ((org-block-begin-line &override) :background base2)
-   ((org-level-2 &override) :foreground base8)
+   ((org-level-2 &override) :foreground light-yellow)
    ;;;; org-pomodoro
    (org-pomodoro-mode-line :inherit 'mode-line-emphasis) ; unreadable otherwise
    (org-pomodoro-mode-line-overtime :inherit 'org-pomodoro-mode-line)
