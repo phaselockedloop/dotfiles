@@ -45,7 +45,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
-plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent fzf-tab forgit zsh-syntax-highlighting docker)
+plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent fzf-tab zsh-syntax-highlighting docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,7 +81,6 @@ path_dirs=(
   "$HOME/.config/emacs.d/bin/"
   "$HOME/Library/Python/3.9/bin"
   "$HOME/.fzf/bin"
-  "$HOME/.oh-my-zsh/custom/plugins/forgit/bin"
   "$HOME/.local/bin"
 )
 

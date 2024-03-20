@@ -32,9 +32,9 @@ echo "\n" >> ~/.cargo/config
 cat ~/dotfiles/cargo_config >> ~/.cargo/config
 
 # scm puff
-cd ~/bin
-wget https://github.com/mroth/scmpuff/releases/download/v0.3.0/scmpuff_0.3.0_linux_x64.tar.gz
-tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
+# cd ~/bin
+# wget https://github.com/mroth/scmpuff/releases/download/v0.3.0/scmpuff_0.3.0_linux_x64.tar.gz
+# tar xzvf scmpuff_0.3.0_linux_x64.tar.gz
 
 # Update git diff
 echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
