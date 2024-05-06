@@ -7,7 +7,7 @@
        hl-todo
        ligatures
        modeline
-       neotree
+       (treemacs +all-the-icons)
        (popup +defaults)
        vc-gutter
        vi-tilde-fringe
