@@ -3,11 +3,11 @@
 " Vim color file
 "
 hi clear
-set background=dark
+set background=black
 if exists("syntax_on")
  syntax reset
 endif
-let g:colors_name = "koehler2"
+let g:colors_name = "koehler"
 hi Normal		 cterm=NONE
 hi Scrollbar	 cterm=NONE
 hi Menu			 cterm=NONE

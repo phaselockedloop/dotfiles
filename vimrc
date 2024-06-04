@@ -18,7 +18,7 @@ set noerrorbells
 set nocompatible
 set t_Co=256
 set hlsearch
-colorscheme koehler2
+colorscheme koehler
 set ignorecase
 set nobackup
 set nowritebackup

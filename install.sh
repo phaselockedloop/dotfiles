@@ -29,7 +29,7 @@ ln -sf ~/dotfiles/koehler2.vim ~/.config/nvim/colors/koehler2.vim
 
 # mold
 echo "\n" >> ~/.cargo/config
-cat ~/dotfiles/cargo_config >> ~/.cargo/config
+cat ~/dotfiles/cargo_config >> ~/.cargo/config.toml
 
 # scm puff
 # cd ~/bin
