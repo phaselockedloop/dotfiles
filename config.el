@@ -134,3 +134,23 @@
   (setq doom-themes-treemacs-theme "doom-colors"))
 
 (setq org-hide-emphasis-markers t)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (show-paren-mode -1)
+            (electric-pair-mode -1)))
+
+(add-hook 'org-mode-hook (lambda ()
+                           (smartparens-mode -1)
+                           (smartparens-strict-mode -1)))
+
+(with-eval-after-load 'smartparens
+  (add-hook 'org-mode-hook (lambda () (smartparens-mode -1))))
+
+;; Ensure rainbow-mode is loaded
+(with-eval-after-load 'rainbow-mode
+  (add-hook 'org-mode-hook (lambda () (rainbow-mode -1))))
+
+;; Ensure rainbow-delimiters-mode is loaded
+(with-eval-after-load 'rainbow-delimiters
+  (add-hook 'org-mode-hook (lambda () (rainbow-delimiters-mode -1))))
