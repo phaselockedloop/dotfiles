@@ -45,7 +45,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
-plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir z extract gpg-agent fzf-tab zsh-syntax-highlighting docker)
+plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract gpg-agent fzf-tab zsh-syntax-highlighting docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -151,6 +151,10 @@ autoload -U +X bashcompinit && bashcompinit
 
 if [ -x "$(command -v scmpuff)" ]; then
   eval "$(scmpuff init -s)"
+fi
+
+if [ -x "$(command -v zoxide)" ]; then
+  eval "$(zoxide init zsh)"
 fi
 
 if whence -v vivid > /dev/null 2>&1; then
