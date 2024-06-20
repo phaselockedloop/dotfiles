@@ -42,7 +42,7 @@ echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 # Rust
 [ -s "$HOME/.rust/bin" ] && ln -s $HOME/.rust/bin $HOME/.cargo/bin
 $BASEDIR/rustup.sh -y --default-toolchain stable
-nice -n 19 cargo install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide &
+nice -n 19 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide &
 
 # FZF
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
