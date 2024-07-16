@@ -33,7 +33,7 @@ cat ~/dotfiles/cargo_config >> ~/.cargo/config.toml
 
 # Update git diff
 echo "[user]\n    email = andrew.knowles@shopify.com" >> $HOME/.gitconfig
-echo "[user]\n    name = Andrew Knowles" >> $HOME/.gitconfig
+echo "\n    name = Andrew Knowles" >> $HOME/.gitconfig
 echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
 
 # Rust
