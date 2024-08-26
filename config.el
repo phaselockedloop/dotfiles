@@ -1,9 +1,9 @@
 (load "~/dotfiles/custom.el" 'noerror)
 (setq user-full-name "Andrew Knowles"
       user-mail-address "andrew.knowles@gmail.com")
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 12)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 12)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 12)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 18)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 18)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 18)
       )
 (setq org-directory "~/org/")
 (setq display-line-numbers-type t)
@@ -154,3 +154,22 @@
 ;; Ensure rainbow-delimiters-mode is loaded
 (with-eval-after-load 'rainbow-delimiters
   (add-hook 'org-mode-hook (lambda () (rainbow-delimiters-mode -1))))
+
+(add-hook 'org-mode-hook 'org-rainbow-tags-mode)
+
+(use-package! org-rainbow-tags)
+
+(setq initial-buffer-choice "~/Library/CloudStorage/GoogleDrive-andrew.knowles@shopify.com/My Drive/todo.org")
+
+;; Set predefined frame geometry
+(setq initial-frame-alist
+      '((top . 45)      ;; Y-coordinate
+        (left . 20)     ;; X-coordinate
+        (width . 170)   ;; Width in characters
+        (height . 89))) ;; Height in characters
+
+(setq default-frame-alist
+      '((top . 45)      ;; Y-coordinate
+        (left . 20)     ;; X-coordinate
+        (width . 170)   ;; Width in characters
+        (height . 89))) ;; Height in characters

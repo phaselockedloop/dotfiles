@@ -47,7 +47,10 @@ export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
 
 plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract gpg-agent fzf-tab zsh-syntax-highlighting docker)
 
+GENCOMPL_PY=python3
 source $ZSH/oh-my-zsh.sh
+source $HOME/$CONFIG_DIR/zsh-completion-generator.plugin.zsh
+zstyle :plugin:zsh-completion-generator programs   rg bat
 
 setopt shwordsplit
 setopt HIST_IGNORE_ALL_DUPS
@@ -138,12 +141,11 @@ rglt() {
   rg -g "*.rb" -p "$1" | less
 }
 
-fpath+=$HOME/$CONFIG_DIR'/purer-prompt/functions'
+fpath=($ZSH/'completions' $fpath)
+fpath=($HOME/$CONFIG_DIR'/purer-prompt/functions' $fpath)
 
 autoload -U promptinit; promptinit
 prompt purer
-
-autoload -U +X bashcompinit && bashcompinit
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
@@ -191,5 +193,9 @@ function _fzf_compgen_dir() {
 
 source "$HOME/$CONFIG_DIR/completion.zsh"
 source "$HOME/$CONFIG_DIR/key-bindings.zsh"
+
+typeset -U fpath
+autoload -U +X bashcompinit && bashcompinit
+compinit
 
 #zprof

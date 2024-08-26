@@ -74,3 +74,4 @@
 (package! treemacs)
 (package! treemacs-nerd-icons)
 (package! neotree :disable t)
+(package! org-rainbow-tags)
