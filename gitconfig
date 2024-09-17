@@ -1,17 +1,31 @@
 [user]
-    email = andrew.knowles@gmail.com
+	email = andrew.knowles@shopify.com
     name = Andrew Knowles
 [core]
-    commitGraph = true
-    excludesfile = ~/.gitignore_global
+    excludesfile = /Users/andrewknowles/.gitignore_global
     editor = nvim
-[diff]
-    algorithm = patience
-[protocol]
-    version = 2
 [init]
     defaultBranch = master
 [pull]
     ff = only
 [fetch]
     prune = true
+[merge]
+    conflictstyle = diff3
+[alias]
+    fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+[push]
+    autoSetupRemote = true
+[pager]
+    difftool = true
+[include]
+    path = ~/.config/dev/gitconfig
+    path = ~/dotfiles/git-delta.conf
+[commit]
+    template = /Users/andrewknowles/.stCommitMsg
+[advice]
+	detachedHead = false
+[rebase]
+	updateRefs = true
+[submodule]
+    recurse = true

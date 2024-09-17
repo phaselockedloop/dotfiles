@@ -59,7 +59,7 @@
 (global-set-key (kbd "C-S-p") #'helm-projectile)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (after! org
-  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i)" "|" "DONE(d)" "SKIPPED(s)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i)" "REVIEW(r)" "|" "DONE(d)" "SKIPPED(s)")))
   )
 (projectile-global-mode)
 (setq projectile-enable-caching t)
@@ -173,3 +173,5 @@
         (left . 20)     ;; X-coordinate
         (width . 170)   ;; Width in characters
         (height . 89))) ;; Height in characters
+
+(setq org-startup-with-inline-images t)
