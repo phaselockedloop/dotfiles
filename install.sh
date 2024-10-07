@@ -1,46 +1,71 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-BASEDIR="$(cd "$(dirname "$0")"; pwd)"
-PLUGINS_DIR=~/.oh-my-zsh/custom/plugins
+set -euo pipefail
 
-# Directories
-mkdir -p ~/.tmux/plugins ~/bin ~/.local/share/nvim/site/autoload ~/.config/nvim/colors ~/.cargo
+BASEDIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGINS_DIR="${HOME}/.oh-my-zsh/custom/plugins"
 
-# tpm
-git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm &
+# Function to install packages
+install_packages() {
+    sudo apt-get update
+    sudo apt-get install -y neovim wget npm htop mold clang
+}
 
-# oh-my-zsh
-$BASEDIR/ohmyzsh.sh --unattended
-git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions $PLUGINS_DIR/zsh-autosuggestions &
-git clone --depth 1 https://github.com/Aloxaf/fzf-tab $PLUGINS_DIR/fzf-tab &
-git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git $PLUGINS_DIR/zsh-syntax-highlighting &
-git clone --depth 1 https://github.com/wfxr/forgit.git $PLUGINS_DIR/forgit &
+# Function to clone repositories
+clone_repo() {
+    git clone --depth 1 "$1" "$2" &
+}
 
-# misc installs
-sudo apt-get -y install neovim wget npm htop mold clang
+# Create directories
+mkdir -p "${HOME}/.tmux/plugins" "${HOME}/bin" "${HOME}/.local/share/nvim/site/autoload" "${HOME}/.config/nvim/colors" "${HOME}/.cargo"
 
-# Dotfiles
-ln -sf $BASEDIR/vimrc ~/.vimrc
-ln -sf $BASEDIR/zshrc ~/.zshrc
-ln -sf $BASEDIR/tmux.conf ~/.tmux.conf
-ln -sf $BASEDIR/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
-ln -sf $BASEDIR/vimrc ~/.config/nvim/init.vim
-ln -sf $BASEDI/koehler2.vim ~/.config/nvim/colors/koehler2.vim
+# Clone repositories
+clone_repo "https://github.com/tmux-plugins/tpm" "${HOME}/.tmux/plugins/tpm"
+"${BASEDIR}/ohmyzsh.sh" --unattended
+clone_repo "https://github.com/zsh-users/zsh-autosuggestions" "${PLUGINS_DIR}/zsh-autosuggestions"
+clone_repo "https://github.com/Aloxaf/fzf-tab" "${PLUGINS_DIR}/fzf-tab"
+clone_repo "https://github.com/zsh-users/zsh-syntax-highlighting.git" "${PLUGINS_DIR}/zsh-syntax-highlighting"
+clone_repo "https://github.com/wfxr/forgit.git" "${PLUGINS_DIR}/forgit"
 
-# mold
-echo "\n" >> ~/.cargo/config
-cat ~/dotfiles/cargo_config >> ~/.cargo/config.toml
+# Install packages
+install_packages
 
-# Update git diff
-echo "[user]\n    email = andrew.knowles@shopify.com" >> $HOME/.gitconfig
-echo "\n    name = Andrew Knowles" >> $HOME/.gitconfig
-echo "[include]\n    path = ~/dotfiles/git-delta.conf" >> $HOME/.gitconfig
+# Create symlinks
+ln -sf "${BASEDIR}/vimrc" "${HOME}/.vimrc"
+ln -sf "${BASEDIR}/zshrc" "${HOME}/.zshrc"
+ln -sf "${BASEDIR}/tmux.conf" "${HOME}/.tmux.conf"
+ln -sf "${BASEDIR}/plug.vim" "${HOME}/.local/share/nvim/site/autoload/plug.vim"
+ln -sf "${BASEDIR}/vimrc" "${HOME}/.config/nvim/init.vim"
+ln -sf "${BASEDIR}/koehler2.vim" "${HOME}/.config/nvim/colors/koehler2.vim"
 
-# Rust
-[ -s "$HOME/.rust/bin" ] && ln -s $HOME/.rust/bin $HOME/.cargo/bin
-$BASEDIR/rustup.sh -y --default-toolchain stable
-nice -n 19 $HOME/.cargo/bin/cargo install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide git-absorb&
+# Configure cargo
+echo -e "\n" >> "${HOME}/.cargo/config"
+cat "${BASEDIR}/cargo_config" >> "${HOME}/.cargo/config.toml"
 
-# FZF
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all
+# Configure git
+{
+    echo "[user]"
+    echo "    email = andrew.knowles@shopify.com"
+    echo "    name = Andrew Knowles"
+    echo "[include]"
+    echo "    path = ${BASEDIR}/git-delta.conf"
+} >> "${HOME}/.gitconfig"
+
+# Install Rust
+if [ -s "${HOME}/.rust/bin" ]; then
+    ln -s "${HOME}/.rust/bin" "${HOME}/.cargo/bin"
+fi
+"${BASEDIR}/rustup.sh" -y --default-toolchain stable
+nice -n 19 "${HOME}/.cargo/bin/cargo" install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide git-absorb &
+
+# Install FZF
+git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.fzf"
+"${HOME}/.fzf/install" --all
+
+# Install Brew
+/bin/bash -c "${BASEDIR}/brew.sh"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew install withgraphite/tap/graphite
+
+# Wait for background jobs to finish
+wait
