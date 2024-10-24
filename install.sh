@@ -63,7 +63,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.fzf"
 "${HOME}/.fzf/install" --all
 
 # Install Brew
-/bin/bash -c "${BASEDIR}/brew.sh"
+CI=1 /bin/bash -c "${BASEDIR}/brew.sh"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew install withgraphite/tap/graphite
 

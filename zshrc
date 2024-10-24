@@ -85,6 +85,7 @@ path_dirs=(
   "$HOME/Library/Python/3.9/bin"
   "$HOME/.fzf/bin"
   "$HOME/.local/bin"
+  "$HOME/.linuxbrew/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
