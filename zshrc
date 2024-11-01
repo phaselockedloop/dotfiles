@@ -85,7 +85,7 @@ path_dirs=(
   "$HOME/Library/Python/3.9/bin"
   "$HOME/.fzf/bin"
   "$HOME/.local/bin"
-  "$HOME/.linuxbrew/bin"
+  "/home/linuxbrew/.linuxbrew/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
@@ -151,6 +151,7 @@ prompt purer
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 if [ -x "$(command -v scmpuff)" ]; then
   eval "$(scmpuff init -s)"
