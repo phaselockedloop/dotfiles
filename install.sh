@@ -39,7 +39,7 @@ ln -sf "${BASEDIR}/vimrc" "${HOME}/.config/nvim/init.vim"
 ln -sf "${BASEDIR}/koehler2.vim" "${HOME}/.config/nvim/colors/koehler2.vim"
 
 # Configure cargo
-echo -e "\n" >> "${HOME}/.cargo/config"
+echo -e "\n" >> "${HOME}/.cargo/config.toml"
 cat "${BASEDIR}/cargo_config" >> "${HOME}/.cargo/config.toml"
 
 # Configure git
