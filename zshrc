@@ -197,29 +197,66 @@ function _fzf_compgen_dir() {
 cd_fzf_full() {
   local current_dir=$(pwd)
   local paths=()
+  local parent_paths=()
 
+  # Populate with every parent directory
+  # But exclude current directory and root directory
+  # Put newlines between parent paths so FZF works
   while [[ "$current_dir" != "/" ]]; do
-    paths=("$current_dir" "${paths[@]}")
+    parent_paths+=($current_dir$'\n')
     current_dir=$(dirname "$current_dir")
   done
 
-  paths=("/" "${paths[@]}")
-  # Remove empty paths
-  local nested_dirs=$(fd --type d --exclude ".git" --exclude "target/release" . "$(pwd)")
-  local all_dirs=$(printf "%s\n%s\n" "${paths[@]}" "$nested_dirs" | sort -u)
+  parent_paths=("${parent_paths[@]:1:${#parent_paths[@]}-1}")
+
+  # Get directories by depth, limited to 50 total
+  local nested_dirs=""
+  local count=0
+  local depth=1
+
+  while [[ $count -lt 50 ]]; do
+    # Get directories at current depth and make paths relative to current directory
+    local dirs_at_depth=$(fd --type d --exclude ".git" --exclude "target/release" --max-depth $depth --min-depth $depth . "$(pwd)" | \
+      while read -r dir; do
+        echo "${dir#$(pwd)/}"
+      done | head -n $((50 - count)))
+
+    if [[ -z "$dirs_at_depth" ]]; then
+      break
+    fi
+
+    nested_dirs+=$dirs_at_depth$'\n'
+    count=$((count + $(echo "$dirs_at_depth" | wc -l)))
+    depth=$((depth + 1))
+  done
+
+  local all_dirs=$(printf "%s\n%s" "${parent_paths[@]}" "$nested_dirs" | sed '/^$/d' | sort -r)
   local selected_dir=$(echo "$all_dirs" | fzf --tac)
 
-  if [[ -n $selected_dir ]]; then
-   cd "$selected_dir"
+  if [[ -n "$selected_dir" ]]; then
+    cd "$selected_dir"
     zle reset-prompt  # Refresh prompt to reflect new directory
+  else
+    echo "No directory selected $selected_dir"
   fi
 }
 
 # Create a zle widget
 zle -N cd_fzf_full_widget cd_fzf_full
 
-# Bind Control-P to the above widget
-bindkey "^P" cd_fzf_full_widget
+# Bind Control-o to the above widget
+bindkey "^o" cd_fzf_full_widget
+
+# Make a widget for zoxide interactive
+zoxide_query_interactive() {
+  zoxide query --interactive
+  cd $selected_dir
+  zle reset-prompt
+}
+zle -N zoxide_query_interactive_widget zoxide_query_interactive
+
+# Bind control-i to zoxide interactive
+bindkey "^i" zoxide_query_interactive_widget
 
 source "$HOME/$CONFIG_DIR/completion.zsh"
 source "$HOME/$CONFIG_DIR/key-bindings.zsh"
