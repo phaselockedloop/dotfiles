@@ -193,6 +193,34 @@ function _fzf_compgen_dir() {
    fd --color always --type d --hidden --follow --exclude ".git" . "$1"
 }
 
+# Function to navigate directories using fzf and fd
+cd_fzf_full() {
+  local current_dir=$(pwd)
+  local paths=()
+
+  while [[ "$current_dir" != "/" ]]; do
+    paths=("$current_dir" "${paths[@]}")
+    current_dir=$(dirname "$current_dir")
+  done
+
+  paths=("/" "${paths[@]}")
+  # Remove empty paths
+  local nested_dirs=$(fd --type d --exclude ".git" --exclude "target/release" . "$(pwd)")
+  local all_dirs=$(printf "%s\n%s\n" "${paths[@]}" "$nested_dirs" | sort -u)
+  local selected_dir=$(echo "$all_dirs" | fzf --tac)
+
+  if [[ -n $selected_dir ]]; then
+   cd "$selected_dir"
+    zle reset-prompt  # Refresh prompt to reflect new directory
+  fi
+}
+
+# Create a zle widget
+zle -N cd_fzf_full_widget cd_fzf_full
+
+# Bind Control-P to the above widget
+bindkey "^P" cd_fzf_full_widget
+
 source "$HOME/$CONFIG_DIR/completion.zsh"
 source "$HOME/$CONFIG_DIR/key-bindings.zsh"
 
@@ -220,4 +248,3 @@ _gt_yargs_completions()
 }
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
-
