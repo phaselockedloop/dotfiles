@@ -235,10 +235,8 @@ cd_fzf_full() {
 
   if [[ -n "$selected_dir" ]]; then
     cd "$selected_dir"
-    zle reset-prompt  # Refresh prompt to reflect new directory
-  else
-    echo "No directory selected $selected_dir"
   fi
+  zle reset-prompt  # Refresh prompt to reflect new directory
 }
 
 # Create a zle widget
@@ -249,14 +247,16 @@ bindkey "^o" cd_fzf_full_widget
 
 # Make a widget for zoxide interactive
 zoxide_query_interactive() {
-  zoxide query --interactive
-  cd $selected_dir
-  zle reset-prompt
+  local selected_dir=$(zoxide query --interactive)
+  if [[ -n "$selected_dir" ]]; then
+    cd "$selected_dir"
+  fi
+  zle reset-prompt  # Refresh prompt to reflect new directory
 }
 zle -N zoxide_query_interactive_widget zoxide_query_interactive
 
 # Bind control-i to zoxide interactive
-bindkey "^i" zoxide_query_interactive_widget
+bindkey "^u" zoxide_query_interactive_widget
 
 source "$HOME/$CONFIG_DIR/completion.zsh"
 source "$HOME/$CONFIG_DIR/key-bindings.zsh"
