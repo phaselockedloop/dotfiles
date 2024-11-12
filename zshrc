@@ -193,6 +193,23 @@ function _fzf_compgen_dir() {
    fd --color always --type d --hidden --follow --exclude ".git" . "$1"
 }
 
+killport() {
+  if [ -z "$1" ]; then
+    echo "Usage: killport <port>"
+    return 1
+  fi
+
+  PORT=$1
+  PID=$(lsof -t -i :"$PORT")
+
+  if [ -n "$PID" ]; then
+    echo "Killing process $PID running on port $PORT"
+    kill -9 "$PID"
+  else
+    echo "No process is running on port $PORT"
+  fi
+}
+
 # Function to navigate directories using fzf and fd
 cd_fzf_full() {
   local current_dir=$(pwd)
