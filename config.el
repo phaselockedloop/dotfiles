@@ -159,8 +159,6 @@
 
 (use-package! org-rainbow-tags)
 
-(setq initial-buffer-choice "~/Library/CloudStorage/GoogleDrive-andrew.knowles@shopify.com/My Drive/todo.org")
-
 ;; Set predefined frame geometry
 (setq initial-frame-alist
       '((top . 45)      ;; Y-coordinate

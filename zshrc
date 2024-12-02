@@ -54,7 +54,6 @@ zstyle :plugin:zsh-completion-generator programs   rg bat
 
 setopt shwordsplit
 setopt HIST_IGNORE_ALL_DUPS
-setopt no_complete_aliases
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
