@@ -111,9 +111,9 @@ alias mig="DISABLE_SPRING=1 bin/rails db:migrate db:test:prepare"
 alias myprs='gh pr list -S '\''is:open is:pr author:@me archived:false'\'
 alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
 alias dt="dev test"
-alias force_remote='git fetch origin $(git rev-parse --abbrev-ref HEAD) && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
-alias clean_local_branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
-alias rebase_remote_main='git fetch origin main && git rebase origin/main && git push --force-with-lease'
+alias force-remote='git fetch origin $(git rev-parse --abbrev-ref HEAD) && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
+alias clean-local-branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
+alias rebase-remote-main='git fetch origin main && git rebase origin/main && git push --force-with-lease'
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
