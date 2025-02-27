@@ -301,3 +301,32 @@ _gt_yargs_completions()
 }
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
+
+function cdworktree() {
+    # Get the root git directory
+    local git_root=$(git rev-parse --git-common-dir 2>/dev/null)
+
+    if [[ -z "$git_root" ]]; then
+        echo "Not in a git repository"
+        return 1
+    fi
+
+    # Remove .git from the end if present
+    git_root=${git_root%.git}
+
+    # Get list of worktrees and change directory
+    local selected_dir=$(git worktree list | 
+        fzf --height 40% --reverse --header="Select a worktree" |
+        awk '{print $1}')
+
+    if [[ -n "$selected_dir" ]]; then
+        cd "${selected_dir}"
+        # Print current directory for confirmation
+        echo "Changed to: $(pwd)"
+    fi
+}
+
+# Create an alias for easier use
+alias wt="cdworktree"
+
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
