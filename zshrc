@@ -103,7 +103,7 @@ alias gfz="git fuzzy"
 alias cat="bat"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias grsh="git reset --hard"
-alias c="cd ~/src"
+alias c="cursor ."
 alias gs="git status"
 alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 alias tree="lsd --tree"
@@ -114,6 +114,8 @@ alias dt="dev test"
 alias force-remote='git fetch origin $(git rev-parse --abbrev-ref HEAD) && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
 alias clean-local-branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
 alias rebase-remote-main='git fetch origin main && git rebase origin/main && git push --force-with-lease'
+alias my-branches="git branch --list 'phaselockedloop*'"
+alias wt="cdworktree"
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
@@ -326,7 +328,5 @@ function cdworktree() {
     fi
 }
 
-# Create an alias for easier use
-alias wt="cdworktree"
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
