@@ -9,7 +9,6 @@ Plug 'airblade/vim-gitgutter', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wsdjeg/vim-fetch'
-" Plug 'pseewald/vim-anyfold'
 Plug 'arecarn/vim-fold-cycle'
 call plug#end()
 syntax on
@@ -79,3 +78,7 @@ set ttimeoutlen=100
 set timeoutlen=3000
 set spelllang=en_ca
 set guicursor-=a:blinkon0
+set ttyfast
+set lazyredraw
+set termguicolors
+let g:airline_theme = 'minimalist'

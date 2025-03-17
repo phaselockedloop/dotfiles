@@ -116,6 +116,7 @@ alias clean-local-branches='git branch --merged | grep -v main | grep -v master 
 alias rebase-remote-main='git fetch origin main && git rebase origin/main && git push --force-with-lease'
 alias my-branches="git branch --list 'phaselockedloop*'"
 alias wt="cdworktree"
+alias bbat="bat --paging=never --plain --color always"
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
