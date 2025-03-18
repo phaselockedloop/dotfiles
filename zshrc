@@ -77,7 +77,7 @@ path_dirs=(
   "$HOME/src/git-fuzzy/bin"
   "$HOME/tools"
   "$HOME/bin"
-  "$HOME/$CONFIG_DIR"
+  "$HOME/$CONFIG_DIR/scripts"
   "$HOME/.rbenv/bin/"
   "$HOME/.emacs.d/bin/"
   "$HOME/.config/emacs.d/bin/"
@@ -150,14 +150,8 @@ fpath=($HOME/$CONFIG_DIR'/purer-prompt/functions' $fpath)
 autoload -U promptinit; promptinit
 prompt purer
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
-
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-if [ -x "$(command -v scmpuff)" ]; then
-  eval "$(scmpuff init -s)"
-fi
 
 if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
@@ -178,7 +172,7 @@ enable-fzf-tab
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
 if [ "$TERM_PROGRAM" = tmux ]; then
-    $HOME/$CONFIG_DIR/fix_blink.sh
+    $HOME/$CONFIG_DIR/scripts/fix_blink.sh
 fi
 
 function _fzf_complete_dt() {
@@ -318,7 +312,7 @@ function cdworktree() {
     git_root=${git_root%.git}
 
     # Get list of worktrees and change directory
-    local selected_dir=$(git worktree list | 
+    local selected_dir=$(git worktree list |
         fzf --height 40% --reverse --header="Select a worktree" |
         awk '{print $1}')
 
@@ -328,6 +322,3 @@ function cdworktree() {
         echo "Changed to: $(pwd)"
     fi
 }
-
-
-[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
