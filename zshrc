@@ -113,7 +113,7 @@ alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
 alias dt="dev test"
 alias force-remote='git fetch origin $(git rev-parse --abbrev-ref HEAD) && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
 alias clean-local-branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
-alias rebase-remote-main='git fetch origin main && git rebase origin/main && git push --force-with-lease'
+alias rebase-remote-main='gco main && git pull && gco - && gt restack && gt submit'
 alias my-branches="git branch --list 'phaselockedloop*'"
 alias wt="cdworktree"
 alias bbat="bat --paging=never --plain --color always"
@@ -322,3 +322,5 @@ function cdworktree() {
         echo "Changed to: $(pwd)"
     fi
 }
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
