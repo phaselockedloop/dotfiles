@@ -44,16 +44,6 @@ ln -sf "${BASEDIR}/koehler2.vim" "${HOME}/.config/nvim/colors/koehler2.vim"
 echo -e "\n" >> "${HOME}/.cargo/config.toml"
 cat "${BASEDIR}/cargo_config" >> "${HOME}/.cargo/config.toml"
 
-# Configure git
-{
-    echo "[user]"
-    echo "    email = andrew.knowles@shopify.com"
-    echo "    name = Andrew Knowles"
-    echo "[include]"
-    echo "    path = ${BASEDIR}/git-delta.conf"
-} >> "${HOME}/.gitconfig"
-
-# Install Rust
 if [ -s "${HOME}/.rust/bin" ]; then
     ln -s "${HOME}/.rust/bin" "${HOME}/.cargo/bin"
 fi
@@ -66,7 +56,6 @@ sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" -y
 # Install Brew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew install withgraphite/tap/graphite
 
 # Wait for background jobs to finish
 wait
