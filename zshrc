@@ -43,9 +43,9 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
-export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git"
+export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git gt"
 
-plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract gpg-agent fzf-tab zsh-syntax-highlighting)
+plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract fzf-tab zsh-syntax-highlighting)
 
 GENCOMPL_PY=python3
 source $ZSH/oh-my-zsh.sh
@@ -104,7 +104,6 @@ alias cat="bat"
 alias gll='git log --graph --pretty="format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias grsh="git reset --hard"
 alias c="cursor ."
-alias gs="git status"
 alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 alias tree="lsd --tree"
 alias mig="DISABLE_SPRING=1 bin/rails db:migrate db:test:prepare"
@@ -117,6 +116,12 @@ alias rebase-remote-main='gco main && git pull && gco - && gt restack && gt subm
 alias my-branches="git branch --list 'phaselockedloop*'"
 alias wt="cdworktree"
 alias bbat="bat --paging=never --plain --color always"
+
+# Graphite
+alias gs="gt status"
+alias gco="gt checkout"
+alias gca="gt create"
+alias gm="gt modify --all"
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)

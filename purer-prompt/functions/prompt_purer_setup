@@ -1,5 +1,4 @@
 STATUS_COLOR='cyan'
-typeset -gA prompt_pure_git_last_dirty_check_timestamps
 prompt_pure_clear_screen() {
 	zle -I
 	print -n '\e[2J\e[0;0H'
@@ -13,40 +12,19 @@ prompt_pure_string_length_to_var() {
 	local str=$1 var=$2 length
 	typeset -g "${var}"="${length}"
 }
-prompt_pure_check_git_dirty() {
-	local untracked_dirty=$1
-	local dirty_color=${PURE_GIT_DIRTY_COLOR:-red}
-	local clean_color=${PURE_GIT_CLEAN_COLOR:-242}
-	local git_root="${vcs_info_msg_1_#x}"
-
-	# Return the same symbol if git repo is not modified
-	if [[ -z $(git status --porcelain --ignore-submodules=dirty -uno) ]]; then
-		prompt_pure_git_dirty=0
-		git_color=$clean_color
-	else
-		prompt_pure_git_dirty=1
-		git_color=$dirty_color
-	fi
-
-	# Store timestamp per repository
-	prompt_pure_git_last_dirty_check_timestamps[$git_root]=$EPOCHSECONDS
-}
 prompt_pure_preprompt_render() {
 	local prompt_subst_status=$options[prompt_subst]
 	setopt local_options no_prompt_subst
 	[[ -n ${prompt_pure_cmd_timestamp+x} && "$1" != "precmd" ]] && return
 	local git_color=242
-	[[ $prompt_pure_git_dirty -eq 1 ]] && git_color=red
 
 	local preprompt=""
 	local symbol_color="%(?.${PURE_PROMPT_SYMBOL_COLOR:-magenta}.red)"
 	local path_formatting="${PURE_PROMPT_PATH_FORMATTING:-%c}"
 	preprompt+="%B%F{$STATUS_COLOR}$path_formatting%f%b"
-	preprompt+=$'\n'
-	preprompt+="%F{$git_color}${vcs_info_msg_0_}%f"
+	preprompt+="${vcs_info_msg_0_:+ }%F{$git_color}${vcs_info_msg_0_}%f"
 	preprompt+=$prompt_pure_username
-	preprompt+=$'\n'
-	preprompt+="%F{cyan}❯%F{blue}❯%F{green}❯%f "
+	preprompt+=" %F{cyan}❯%F{blue}❯%F{green}❯%f "
 	typeset -g -a prompt_pure_last_preprompt
 	PROMPT="$preprompt"
 	if [[ "$1" != "precmd" ]]; then
@@ -54,34 +32,6 @@ prompt_pure_preprompt_render() {
 		setopt no_prompt_subst
 	fi
 	prompt_pure_last_preprompt=("$preprompt" "${(S%%)preprompt}")
-}
-prompt_pure_check_git_dirty_async() {
-	setopt localoptions noshwordsplit
-	local untracked_dirty=$1
-	local -a args
-	args=("${(@)argv[2,-1]}")
-
-	cd -q "$args[1]"
-	if [[ -z $(git status --porcelain --ignore-submodules=dirty -uno) ]]; then
-		async_process_results "prompt_pure" "%F{242}"
-	else
-		async_process_results "prompt_pure" "%F{red}"
-	fi
-}
-prompt_pure_async_git_fetch() {
-	setopt localoptions noshwordsplit
-	cd -q "$1"
-
-	# Check for dirty status
-	local untracked_dirty=$2
-	if [[ -z $(git status --porcelain --ignore-submodules=dirty -uno) ]]; then
-		typeset -g prompt_pure_git_dirty=0
-	else
-		typeset -g prompt_pure_git_dirty=1
-	fi
-
-	async_worker_eval "prompt_pure" builtin cd -q "$1"
-	prompt_pure_async_renice
 }
 prompt_pure_async_tasks() {
 	setopt localoptions noshwordsplit
@@ -91,13 +41,6 @@ prompt_pure_async_tasks() {
 		async_start_worker "prompt_pure" -u -n
 		async_register_callback "prompt_pure" prompt_pure_async_callback
 		typeset -g prompt_pure_async_init=1
-	}
-
-	# Update git dirty status
-	[[ -n ${vcs_info_msg_0_} ]] && {
-		local git_root="${vcs_info_msg_1_#x}"
-		async_worker_eval "prompt_pure" builtin cd -q "$git_root"
-		async_job "prompt_pure" prompt_pure_async_git_fetch "$git_root" "${PURE_GIT_UNTRACKED_DIRTY:-1}"
 	}
 }
 prompt_pure_async_callback() {
@@ -113,11 +56,6 @@ prompt_pure_async_callback() {
 				typeset -g prompt_pure_async_init=0
 			fi
 			;;
-		prompt_pure_async_git_fetch)
-			local git_root="${vcs_info_msg_1_#x}"
-			prompt_pure_git_last_dirty_check_timestamps[$git_root]=$EPOCHSECONDS
-			prompt_pure_preprompt_render
-			;;
 	esac
 }
 prompt_pure_async_renice() {
@@ -128,17 +66,6 @@ prompt_pure_precmd() {
 	prompt_pure_cmd_timestamp=
 	vcs_info
 	psvar[12]=
-
-	# Check git dirty status
-	if [[ -n ${vcs_info_msg_0_} ]]; then
-		local git_root="${vcs_info_msg_1_#x}"
-		# Only check git status if last check for this repo was more than 60 seconds ago
-		local last_check=${prompt_pure_git_last_dirty_check_timestamps[$git_root]:-0}
-		local time_since_last_check=$((EPOCHSECONDS - last_check))
-		if [[ $time_since_last_check -gt 60 ]]; then
-			prompt_pure_check_git_dirty ${PURE_GIT_UNTRACKED_DIRTY:-1}
-		fi
-	fi
 
 	prompt_pure_preprompt_render "precmd"
 	PURER_PROMPT_COMMAND_COUNT=$((PURER_PROMPT_COMMAND_COUNT+1))
