@@ -7,13 +7,16 @@ PLUGINS_DIR="${HOME}/.oh-my-zsh/custom/plugins"
 
 # Function to install packages
 install_packages() {
-    sudo apt-get update
+    sudo apt-get update -y
     sudo apt-get install -y neovim wget npm htop mold clang
+    sudo apt-get upgrade -y
+    sudo apt-get dist-upgrade -y
+    sudo apt-get -y autoremove
 }
 
 # Function to clone repositories
 clone_repo() {
-    git clone --depth 1 "$1" "$2" &
+    git clone --depth 1 "$1" "$2"
 }
 
 # Create directories
@@ -48,7 +51,7 @@ if [ -s "${HOME}/.rust/bin" ]; then
     ln -s "${HOME}/.rust/bin" "${HOME}/.cargo/bin"
 fi
 sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" -y
-"${HOME}/.cargo/bin/cargo" install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide git-absorb &
+"${HOME}/.cargo/bin/cargo" install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide git-absorb broot topgrade xsv just eza cargo-update dijo tere
 
 # Install FZF
 "${HOME}/.fzf/install" --all
@@ -56,6 +59,3 @@ sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" -y
 # Install Brew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Wait for background jobs to finish
-wait
