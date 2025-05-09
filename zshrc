@@ -195,19 +195,20 @@ function _fzf_compgen_dir() {
 }
 
 killport() {
-  if [ -z "$1" ]; then
-    echo "Usage: killport <port>"
+  if [ "$#" -lt 2 ]; then
+    echo "Usage: killport <hostname> <port>"
     return 1
   fi
 
-  PORT=$1
-  PID=$(lsof -t -i :"$PORT")
+  HOSTNAME=$1
+  PORT=$2
+  PID=$(lsof -t -i @$HOSTNAME:$PORT)
 
   if [ -n "$PID" ]; then
-    echo "Killing process $PID running on port $PORT"
+    echo "Killing process $PID running on $HOSTNAME:$PORT"
     kill -9 "$PID"
   else
-    echo "No process is running on port $PORT"
+    echo "No process is running on $HOSTNAME:$PORT"
   fi
 }
 
@@ -328,4 +329,4 @@ function cdworktree() {
     fi
 }
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+correct_ignore=(claude)
