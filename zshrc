@@ -44,6 +44,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git gt"
+export EDITOR="nvim"
 
 plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract fzf-tab zsh-syntax-highlighting)
 
