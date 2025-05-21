@@ -176,6 +176,8 @@ enable-fzf-tab
 
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
+[ -s "$HOME/.config/broot/launcher/bash/br" ] && source "$HOME/.config/broot/launcher/bash/br"
+
 if [ "$TERM_PROGRAM" = tmux ]; then
     $HOME/$CONFIG_DIR/scripts/fix_blink.sh
 fi
