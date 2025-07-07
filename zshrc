@@ -117,7 +117,7 @@ alias rebase-remote-main='gco main && git pull && gco - && gt restack && gt subm
 alias my-branches="git branch --list 'phaselockedloop*'"
 alias wt="cdworktree"
 alias bbat="bat --paging=never --plain --color always"
-alias claude="claude update && claude"
+alias claude="claude update && claude --dangerously-skip-permissions"
 
 # Graphite
 alias gs="gt status"
