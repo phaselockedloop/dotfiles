@@ -51,7 +51,7 @@ plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-work
 GENCOMPL_PY=python3
 source $ZSH/oh-my-zsh.sh
 source $HOME/$CONFIG_DIR/zsh-completion-generator.plugin.zsh
-zstyle :plugin:zsh-completion-generator programs   rg bat
+zstyle :plugin:zsh-completion-generator programs rg bat
 
 setopt shwordsplit
 setopt HIST_IGNORE_ALL_DUPS
@@ -113,17 +113,21 @@ alias clean_clipboard="pbpaste | sed 's#\\n#\n#g' | pbcopy"
 alias dt="dev test"
 alias force-remote='git fetch origin $(git rev-parse --abbrev-ref HEAD) && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
 alias clean-local-branches='git branch --merged | grep -v main | grep -v master | xargs git branch --delete'
-alias rebase-remote-main='gco main && git pull && gco - && gt restack && gt submit'
+if command -v gt &> /dev/null; then
+  alias rebase-remote-main='gco main && git pull && gco - && gt restack && gt submit'
+fi
 alias my-branches="git branch --list 'phaselockedloop*'"
 alias wt="cdworktree"
 alias bbat="bat --paging=never --plain --color always"
 alias cc="claude update && claude --dangerously-skip-permissions"
 
 # Graphite
-alias gs="gt status"
-alias gco="gt checkout"
-alias gca="gt create"
-alias gm="gt modify --all"
+if command -v gt &> /dev/null; then
+  alias gs="gt status"
+  alias gco="gt checkout"
+  alias gca="gt create"
+  alias gm="gt modify --all"
+fi
 
 gbb() {
     git show --format='%C(auto)%D %s' -s $(git for-each-ref --sort=committerdate --format='%(refname:short)' refs/heads/)
@@ -289,25 +293,27 @@ autoload -U +X bashcompinit && bashcompinit
 compinit
 
 #zprof
-#compdef gt
-###-begin-gt-completions-###
-#
-# yargs command completion script
-#
-# Installation: gt completion >> ~/.zshrc
-#    or gt completion >> ~/.zprofile on OSX.
-#
-_gt_yargs_completions()
-{
-  local reply
-  local si=$IFS
-  IFS=$'
+if command -v gt &> /dev/null; then
+  #compdef gt
+  ###-begin-gt-completions-###
+  #
+  # yargs command completion script
+  #
+  # Installation: gt completion >> ~/.zshrc
+  #    or gt completion >> ~/.zprofile on OSX.
+  #
+  _gt_yargs_completions()
+  {
+    local reply
+    local si=$IFS
+    IFS=$'
 ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "${words[@]}"))
-  IFS=$si
-  _describe 'values' reply
-}
-compdef _gt_yargs_completions gt
-###-end-gt-completions-###
+    IFS=$si
+    _describe 'values' reply
+  }
+  compdef _gt_yargs_completions gt
+  ###-end-gt-completions-###
+fi
 
 function cdworktree() {
     # Get the root git directory
