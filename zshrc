@@ -4,10 +4,10 @@
 export CONFIG_DIR=dotfiles
 
 export ZSH_DISABLE_COMPFIX=true
-export DISABLE_UPDATE_PROMPT=true
 export GIT_COMPLETION_CHECKOUT_NO_GUESS=true
 
-#zmodload zsh/zprof
+export ZSH_DISABLE_COMPFIX=true
+skip_global_compinit=1
 export ZSH=$HOME/.oh-my-zsh
 export FZF_CTRL_T_OPTS="--ansi --preview '(bat {} --color always || highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 1> /dev/null | head -400'"
 export FZF_DEFAULT_COMMAND='fd --color=always --type f'
@@ -19,6 +19,8 @@ export HYPHEN_INSENSITIVE="true"
 export UPDATE_ZSH_DAYS=1
 export DISABLE_AUTO_TITLE="true"
 export DISABLE_AUTO_UPDATE="true"
+export DISABLE_UPDATE_PROMPT=true
+export DISABLE_COMPFIX="true"
 export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="false"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -45,6 +47,8 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git gt"
 export EDITOR="nvim"
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract fzf-tab zsh-syntax-highlighting)
 
@@ -290,9 +294,13 @@ source "$HOME/$CONFIG_DIR/key-bindings.zsh"
 
 typeset -U fpath
 autoload -U +X bashcompinit && bashcompinit
-compinit
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
 
-#zprof
 if command -v gt &> /dev/null; then
   #compdef gt
   ###-begin-gt-completions-###
