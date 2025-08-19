@@ -69,7 +69,9 @@ bindkey '^[^P' history-substring-search-up
 bindkey '^[^N' history-substring-search-down
 bindkey '^ ' autosuggest-accept
 
-# Set PATH
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
 path_dirs=(
   "/usr/local/sbin"
   "/usr/local/bin"
@@ -164,9 +166,6 @@ fpath=($HOME/$CONFIG_DIR'/purer-prompt/functions' $fpath)
 
 autoload -U promptinit; promptinit
 prompt purer
-
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
-[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
