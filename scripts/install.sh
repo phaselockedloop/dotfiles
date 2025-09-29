@@ -51,7 +51,7 @@ if [ -s "${HOME}/.rust/bin" ]; then
     ln -s "${HOME}/.rust/bin" "${HOME}/.cargo/bin"
 fi
 sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" -y
-"${HOME}/.cargo/bin/cargo" install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide git-absorb broot topgrade xsv just eza cargo-update dijo tere
+"${HOME}/.cargo/bin/cargo" install bat fd-find lsd ripgrep git-delta vivid difftastic zoxide git-absorb broot topgrade xsv just eza cargo-update dijo tere starship
 
 # Install FZF
 "${HOME}/.fzf/install" --all

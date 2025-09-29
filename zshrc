@@ -25,8 +25,6 @@ export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="false"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-export PURE_PROMPT_PATH_FORMATTING=%~
-export PURE_GIT_PULL=0
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -162,10 +160,8 @@ rglt() {
 }
 
 fpath=($ZSH/'completions' $fpath)
-fpath=($HOME/$CONFIG_DIR'/purer-prompt/functions' $fpath)
 
 autoload -U promptinit; promptinit
-prompt purer
 
 if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
@@ -347,3 +343,4 @@ function cdworktree() {
 }
 
 correct_ignore=(claude)
+eval "$(starship init zsh)"
