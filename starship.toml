@@ -1,0 +1,55 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+format = "$directory ${custom.git_worktree_branch}$character"
+
+[directory]
+format = "[$path]($style)"
+style = "bold cyan"
+truncation_length = 0
+truncate_to_repo = false
+home_symbol = "~"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "bold yellow"
+only_attached = false
+
+[git_state]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[character]
+format = "$symbol"
+success_symbol = "[❯](bold green)[❯](bold blue)[❯](bold magenta) "
+error_symbol = "[❯](bold green)[❯](bold blue)[❯](bold magenta) "
+vimcmd_symbol = "[❯](bold green)[❯](bold blue)[❯](bold magenta) "
+
+[git_status]
+disabled = true
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+# Custom module to correctly show git branch in worktrees
+[custom.git_worktree_branch]
+command = """
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [ "$branch" = "HEAD" ]; then
+    # In detached state, try to get the symbolic ref
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+  fi
+  echo "$branch"
+fi
+"""
+when = "git rev-parse --git-dir 2>&1"
+shell = ["sh"]
+style = "bold yellow"
+format = "[$output ]($style)"

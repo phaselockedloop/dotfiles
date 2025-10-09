@@ -42,6 +42,7 @@ ln -sf "${BASEDIR}/zshrc" "${HOME}/.zshrc"
 ln -sf "${BASEDIR}/tmux.conf" "${HOME}/.tmux.conf"
 ln -sf "${BASEDIR}/vimrc" "${HOME}/.config/nvim/init.vim"
 ln -sf "${BASEDIR}/koehler2.vim" "${HOME}/.config/nvim/colors/koehler2.vim"
+ln -sf "${BASEDIR}/starship.toml" "${HOME}/.config/starship.toml"
 
 # Configure cargo
 echo -e "\n" >> "${HOME}/.cargo/config.toml"
