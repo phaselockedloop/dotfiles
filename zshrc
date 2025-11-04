@@ -90,6 +90,7 @@ path_dirs=(
   "$HOME/.fzf/bin"
   "$HOME/.local/bin"
   "/home/linuxbrew/.linuxbrew/bin"
+  "$HOME/node_modules/.bin/"
 )
 
 for dir in "${path_dirs[@]}"; do
