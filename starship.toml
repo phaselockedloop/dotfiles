@@ -4,7 +4,7 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-format = "$directory ${custom.git_worktree_branch}$character"
+format = "$directory ${custom.git_worktree_branch}\n$character"
 
 [directory]
 format = "[$path]($style)"
