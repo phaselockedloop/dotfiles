@@ -1,7 +1,9 @@
 # -*- sh -*-
 [ -s "$HOME/.pre.zsh" ] && source "$HOME/.pre.zsh"
 
-export CONFIG_DIR=dotfiles
+# Unset CONFIG_DIR to avoid conflicts with lazygit (set by shadowenv)
+unset CONFIG_DIR
+CONFIG_DIR=dotfiles
 
 export ZSH_DISABLE_COMPFIX=true
 export GIT_COMPLETION_CHECKOUT_NO_GUESS=true
