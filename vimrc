@@ -78,7 +78,7 @@ set ttimeout
 set ttimeoutlen=100
 set timeoutlen=3000
 set spelllang=en_ca
-set guicursor-=a:blinkon0
+set guicursor=n-v-c:block-blinkon500-blinkoff500,i-ci-ve:ver25-blinkon500-blinkoff500,r-cr:hor20-blinkon500-blinkoff500,o:hor50
 set ttyfast
 set lazyredraw
 set termguicolors
@@ -217,5 +217,4 @@ require('lualine').setup {
     lualine_z = {}
   },
 }
-
 EOF

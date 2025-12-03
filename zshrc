@@ -47,8 +47,10 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_COMPLETION_TRIGGER=":"
 export FZF_COMPLETION_DIR_COMMANDS="cd rmdir tree git gt"
 export EDITOR="nvim"
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="50"
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c51,)"
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_HIGHLIGHT_MAXLENGTH=50
 
 plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract fzf-tab zsh-syntax-highlighting)
 
@@ -185,10 +187,6 @@ enable-fzf-tab
 [ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
 
 [ -s "$HOME/.config/broot/launcher/bash/br" ] && source "$HOME/.config/broot/launcher/bash/br"
-
-if [ "$TERM_PROGRAM" = tmux ]; then
-    $HOME/$CONFIG_DIR/scripts/fix_blink.sh
-fi
 
 function _fzf_complete_dt() {
     _fzf_complete --prompt="test:" -- "$@" < <(
