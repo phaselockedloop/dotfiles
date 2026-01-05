@@ -1,0 +1,24 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+    }
+
+    tab name="1-Main" {
+        pane
+    }
+    tab name="2-Editor" {
+        pane
+    }
+    tab name="3-Server" {
+        pane
+    }
+    tab name="4-Logs" {
+        pane
+    }
+    tab name="5-Tests" {
+        pane
+    }
+}

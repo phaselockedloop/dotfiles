@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-BASEDIR="$(cd "$(dirname "$0")" && pwd)"
+BASEDIR="$(cd "$(dirname "$0")/.." && pwd)"
 PLUGINS_DIR="${HOME}/.oh-my-zsh/custom/plugins"
 
 # Function to install packages
@@ -20,7 +20,7 @@ clone_repo() {
 }
 
 # Create directories
-mkdir -p "${HOME}/.tmux/plugins" "${HOME}/bin" "${HOME}/.local/share/nvim/site/autoload" "${HOME}/.config/nvim/colors" "${HOME}/.cargo"
+mkdir -p "${HOME}/.tmux/plugins" "${HOME}/bin" "${HOME}/.local/share/nvim/site/autoload" "${HOME}/.config/nvim/colors" "${HOME}/.cargo" "${HOME}/.config/zellij"
 
 # Clone repositories
 clone_repo "https://github.com/tmux-plugins/tpm" "${HOME}/.tmux/plugins/tpm"
@@ -43,6 +43,8 @@ ln -sf "${BASEDIR}/tmux.conf" "${HOME}/.tmux.conf"
 ln -sf "${BASEDIR}/vimrc" "${HOME}/.config/nvim/init.vim"
 ln -sf "${BASEDIR}/koehler2.vim" "${HOME}/.config/nvim/colors/koehler2.vim"
 ln -sf "${BASEDIR}/starship.toml" "${HOME}/.config/starship.toml"
+ln -sf "${BASEDIR}/zellij/config.kdl" "${HOME}/.config/zellij/config.kdl"
+ln -sf "${BASEDIR}/zellij/layouts" "${HOME}/.config/zellij/layouts"
 
 # Configure cargo
 echo -e "\n" >> "${HOME}/.cargo/config.toml"
