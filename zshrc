@@ -95,6 +95,7 @@ path_dirs=(
   "$HOME/.local/bin"
   "/home/linuxbrew/.linuxbrew/bin"
   "$HOME/node_modules/.bin/"
+  "$HOME/.opencode/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
@@ -193,6 +194,35 @@ function _fzf_complete_dt() {
         fd -t f -p "_test.rb" components/*/test
     )
 }
+
+unalias ga 2>/dev/null
+unalias gr 2>/dev/null
+function ga() { git add "$@" }
+function gr() { git restore --staged "$@" }
+
+_git_fzf_complete() {
+    if [[ "$LBUFFER" =~ ^ga[[:space:]]+ ]]; then
+        local files=$(git diff --relative --name-only | fzf --multi --preview 'git diff --color=always -- {}' --preview-window=right:60%:wrap)
+        if [[ -n "$files" ]]; then
+            LBUFFER="${LBUFFER}${files//$'\n'/ }"
+            zle accept-line
+        else
+            zle redisplay
+        fi
+    elif [[ "$LBUFFER" =~ ^gr[[:space:]]+ ]]; then
+        local files=$(git diff --cached --relative --name-only | fzf --multi --preview 'git diff --cached --color=always -- {}' --preview-window=right:60%:wrap)
+        if [[ -n "$files" ]]; then
+            LBUFFER="${LBUFFER}${files//$'\n'/ }"
+            zle accept-line
+        else
+            zle redisplay
+        fi
+    else
+        zle fzf-tab-complete
+    fi
+}
+zle -N _git_fzf_complete
+bindkey '^I' _git_fzf_complete
 
 function _fzf_compgen_path() {
     rg --files --glob "!.git" . "$1"
