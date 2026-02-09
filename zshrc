@@ -52,11 +52,17 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c51,)"
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_HIGHLIGHT_MAXLENGTH=50
 
+export BUN_INSTALL="$HOME/.bun"
+
 plugins=(git gitfast tmux zsh-autosuggestions history-substring-search last-working-dir extract fzf-tab zsh-syntax-highlighting)
 
 GENCOMPL_PY=python3
 source $ZSH/oh-my-zsh.sh
-source $HOME/$CONFIG_DIR/zsh-completion-generator.plugin.zsh
+source "$HOME/$CONFIG_DIR/zsh-completion-generator.plugin.zsh"
+source "$HOME/$CONFIG_DIR/paste_hell.zsh"
+source "$HOME/$CONFIG_DIR/completion.zsh"
+source "$HOME/$CONFIG_DIR/key-bindings.zsh"
+
 zstyle :plugin:zsh-completion-generator programs rg bat
 
 setopt shwordsplit
@@ -96,6 +102,7 @@ path_dirs=(
   "/home/linuxbrew/.linuxbrew/bin"
   "$HOME/node_modules/.bin/"
   "$HOME/.opencode/bin"
+  "$BUN_INSTALL/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
@@ -104,8 +111,6 @@ done
 
 [ -s "/usr/local/bin/nvim" ]                                                                 && export EDITOR="/usr/local/bin/nvim"
 [ -s "/usr/bin/nvim" ]                                                                       && export EDITOR="/usr/bin/nvim"
-
-source "$HOME/$CONFIG_DIR/paste_hell.zsh"
 
 alias vi=nvim
 alias vim=nvim
@@ -129,7 +134,7 @@ fi
 alias my-branches="git branch --list 'phaselockedloop*'"
 alias wt="cdworktree"
 alias bbat="bat --paging=never --plain --color always"
-alias cc="claude update && claude --dangerously-skip-permissions"
+alias gcom="git checkout main"
 
 # Graphite
 if command -v gt &> /dev/null; then
@@ -182,12 +187,6 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 enable-fzf-tab
-
-[ -s "$HOME/bin/fzf-git.sh" ] && source "$HOME/bin/fzf-git.sh"
-
-[ -s "$HOME/.post.zsh" ] && source "$HOME/.post.zsh"
-
-[ -s "$HOME/.config/broot/launcher/bash/br" ] && source "$HOME/.config/broot/launcher/bash/br"
 
 function _fzf_complete_dt() {
     _fzf_complete --prompt="test:" -- "$@" < <(
@@ -297,8 +296,19 @@ zle -N zoxide_query_interactive_widget zoxide_query_interactive
 # Bind control-i to zoxide interactive
 bindkey "^u" zoxide_query_interactive_widget
 
-source "$HOME/$CONFIG_DIR/completion.zsh"
-source "$HOME/$CONFIG_DIR/key-bindings.zsh"
+# Sources
+
+source_if_exists=(
+  "$HOME/bin/fzf-git.sh"
+  "$HOME/.config/broot/launcher/bash/br"
+  "$HOME/.bun/_bun"
+  "$ZSH/completions/_bun"
+  "$HOME/.post.zsh"
+)
+
+for file in "${source_if_exists[@]}"; do
+  [ -s "$file" ] && source "$file"
+done
 
 typeset -U fpath
 autoload -U +X bashcompinit && bashcompinit
