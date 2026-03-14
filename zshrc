@@ -303,6 +303,7 @@ source_if_exists=(
   "$HOME/.config/broot/launcher/bash/br"
   "$HOME/.bun/_bun"
   "$ZSH/completions/_bun"
+  "$HOME/.sdkman/bin/sdkman-init.sh"
   "$HOME/.post.zsh"
 )
 
