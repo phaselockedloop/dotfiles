@@ -300,7 +300,6 @@ bindkey "^u" zoxide_query_interactive_widget
 
 source_if_exists=(
   "$HOME/bin/fzf-git.sh"
-  "$HOME/.config/broot/launcher/bash/br"
   "$HOME/.bun/_bun"
   "$ZSH/completions/_bun"
   "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -368,3 +367,4 @@ function cdworktree() {
 
 correct_ignore=(claude)
 eval "$(starship init zsh)"
+export PATH=$PATH:/usr/local/go/bin
