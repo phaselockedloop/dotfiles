@@ -103,6 +103,7 @@ path_dirs=(
   "$HOME/node_modules/.bin/"
   "$HOME/.opencode/bin"
   "$BUN_INSTALL/bin"
+  "$HOME/go/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
